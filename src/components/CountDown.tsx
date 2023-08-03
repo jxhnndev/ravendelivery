@@ -25,9 +25,18 @@ const CountDown = () => {
   });
 
   return (
-    <span className="font-bold text-5xl text-yellow-300">
-      {d}:{h}:{m}:{s}
-    </span>
+    <>
+      {difference > 0 ? 
+      <span className="flex flex-wrap justify-center font-bold text-3xl md:text-4xl text-yellow-300 w-full" suppressHydrationWarning>
+        {d > 0 && <>D:{d} </> }
+        {h > 0 && <>H:{h} </> }
+        {m > 0 && <>M:{m} </> }
+        <>S:{s}</>
+      </span>
+      : 
+      <></>
+      }
+    </>
   )
 }
 
