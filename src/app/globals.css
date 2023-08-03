@@ -1,3 +1,70 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*{
+    -webkit-tap-highlight-color: transparent;
+}
+*,
+*:before,
+*:after {
+  @apply cursor-default;
+}
+
+:root {
+    --gold-color: #DBA111;
+    --lightGold-color: #eee4cc;
+    --blue-color: #034694;
+    --hover-color: #033772;
+    --glitched-duration: 0.9s;
+  }
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  background-color: var(--gold-color);
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+::-webkit-scrollbar-track {
+  display: none;
+}
+::-webkit-scrollbar-track-piece {
+  display: none;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--blue-color);
+  border-bottom: 2px solid var(--lightGold-color);
+  border-right: 2px solid var(--lightGold-color);
+  transition: background var(--glitched-duration);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--hover-color);
+}
+::-webkit-scrollbar-corner {
+  display: none;
+}
+::-webkit-resizer {
+  display: none;
+}
+
+/* Scrollbar end */
+
+@layer utilities {
+    @variants responsive {
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+      }
+    }
+  }

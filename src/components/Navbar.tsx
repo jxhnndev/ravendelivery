@@ -8,13 +8,13 @@ const Navbar = () => {
     <div className="h-12 text-gold p-4 flex items-center justify-between border-b-2 border-b-gold uppercase md:h-24 lg:px-20 xl:px-40">
       {/* LEFT LINKS */}
       <div className="hidden md:flex gap-4 flex-1">
-        <Link href="/">Homepage</Link>
-        <Link href="/menu">Menu</Link>
-        <Link href="/">Contact</Link>
+        <Link href="/" className='cursor-pointer hover:text-chelseaBlue'>Homepage</Link>
+        <Link href="/menu" className='cursor-pointer hover:text-chelseaBlue'>Menu</Link>
+        <Link href="/" className='cursor-pointer hover:text-chelseaBlue'>Contact</Link>
       </div>
       {/* LOGO */}
       <div className="text-xl md:font-bold flex-1 md:text-center">
-        <Link href="/">RavenDelivery</Link>
+        <Link href="/" className='cursor-pointer hover:text-chelseaBlue'>RavenDelivery</Link>
       </div>
       {/* MOBILE MENU */}
       <div className="md:hidden">
@@ -27,9 +27,9 @@ const Navbar = () => {
           <span className='text-white text-xs'>123 456 78</span>
         </div>
         {!user ? (
-          <Link href="/login">Login</Link>
+          <Link href="/login" className='cursor-pointer hover:text-chelseaBlue'>Login</Link>
         ) : (
-          <Link href="/orders">Orders</Link>
+          <Link href="/orders" className='cursor-pointer hover:text-chelseaBlue'>Orders</Link>
         )}
         <CartIcon />
       </div>

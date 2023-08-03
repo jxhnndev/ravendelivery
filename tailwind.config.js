@@ -17,6 +17,10 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      cursor: {
+        default: 'url(https://res.cloudinary.com/dvrk2468z/image/upload/v1691071797/pizza-cursor-color_hwluxh.png), default',
+        pointer: 'url(https://res.cloudinary.com/dvrk2468z/image/upload/v1691071797/pizza-pointer_giglxt.png), pointer',
+      },
     },
   },
   plugins: [],
