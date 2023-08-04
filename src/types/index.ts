@@ -47,4 +47,5 @@ export type OfferType = {
   description: string;
   image?: {asset: {_ref: string} };
   buttonTitle: string;
+  endDate: string;
 }

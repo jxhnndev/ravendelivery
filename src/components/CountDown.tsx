@@ -1,8 +1,12 @@
 "use client"
 import { useState, useEffect } from 'react'
 
-const CountDown = () => {
-  let difference = +new Date(`12/31/2023`) - +new Date();
+type Props = {
+  endDate: string
+}
+
+const CountDown = ({endDate}: Props) => {
+  let difference = +new Date(endDate) - +new Date();
   const [delay, setDelay] = useState(difference);
 
   const d = Math.floor(difference / (1000 * 60 * 60 * 24));

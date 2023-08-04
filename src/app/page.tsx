@@ -8,14 +8,14 @@ export default async function Home() {
   const items: Items = await getClient().fetch(itemsQuery)
   const sliderContent: SliderContents = await getClient().fetch(sliderQuery)
   const offer: OfferType = await getClient().fetch(specialOfferQuery)
-  
+
   return (
     <main>
       <Slider data={sliderContent}/>
      {/* 
      * */}
       <Featured />
-      <Offer />
+      <Offer data={offer}/>
     </main>
   )
 }
