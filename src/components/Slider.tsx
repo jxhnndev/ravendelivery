@@ -1,27 +1,19 @@
 "use client";
+import { SliderContents } from "@/types";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import GetImage from '../../utils/getImage';
 
-const data = [
-  {
-    id: 1,
-    title: "high quality ingredients from italy",
-    image: "/img1.png",
-  },
-  {
-    id: 2,
-    title: "we deliver everywhere in Brno",
-    image: "/img2.png",
-  },
-  {
-    id: 3,
-    title: "the best Pizza in town",
-    image: "/img3.jpg",
-  },
-];
+type Props = {
+  data: SliderContents
+}
 
-const Slider = () => {
+const Slider = ({data}: Props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  
+  const imageProps: any = data[currentSlide]?.image
+    ? GetImage(data[currentSlide].image)
+    : null
 
   useEffect(() => {
     const interval = setInterval(
@@ -44,8 +36,9 @@ const Slider = () => {
       {/* IMAGE CONTAINER */}
       <div className="w-full flex-1 relative">
         <Image
-          src={data[currentSlide].image}
-          alt=""
+          src={imageProps.src}
+          loader={imageProps.loader}
+          alt="sliderImage"
           fill
           className="object-cover"
         />
