@@ -8,10 +8,10 @@ import { MdRestaurantMenu } from 'react-icons/md'
 import Image from 'next/image';
 
 const links = [
-  { id: 1, title: "Homepage", url: "/" },
+  { id: 1, title: "Home", url: "/" },
   { id: 2, title: "Menu", url: "/menu" },
-  { id: 3, title: "Working Hours", url: "/" },
-  { id: 4, title: "Contact", url: "/" },
+  { id: 3, title: "About", url: "/about" },
+  { id: 4, title: "Contact", url: "/contact" },
 ];
 
 const Menu = () => {

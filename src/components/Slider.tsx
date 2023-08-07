@@ -27,8 +27,8 @@ const Slider = ({data}: Props) => {
   return (
     <div className="flex flex-col h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] lg:flex-row bg-lightGold">
       {/* TEXT CONTAINER */}
-      <div className="flex-1 flex items-center justify-center flex-col gap-8 text-gold font-bold mb-5">
-        <h1 className="flex w-full justify-center text-5xl text-center uppercase md:text-6xl min-h-[200px] items-center">
+      <div className="flex-1 flex items-center justify-center flex-col gap-8 text-gold font-bold mb-5 px-2">
+        <h1 className="flex w-full justify-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center uppercase min-h-[200px] items-center">
           {data[currentSlide].title}
         </h1>
         <button className="bg-chelseaBlue text-white py-4 px-8 rounded-md hover:bg-gold duration-500 cursor-pointer">Order Now</button>

@@ -10,7 +10,7 @@ const Footer = () => {
             href="https://ravenholmdev.com/"
             target="_blank"
             rel="noreferrer"  
-            className="ml-1 hover:underline font-bold"
+            className="ml-1 hover:underline font-bold cursor-pointer"
           >
             RavenHolmDev
           </Link>
@@ -18,16 +18,16 @@ const Footer = () => {
         </span>
         <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gold sm:mt-0">
           <li>
-            <Link href="#" className="mr-4 hover:underline md:mr-6 ">About</Link>
+            <Link href="/about" className="mr-4 hover:underline cursor-pointer md:mr-6 ">About</Link>
           </li>
           <li>
-            <Link href="#" className="mr-4 hover:underline md:mr-6">Privacy Policy</Link>
+            <Link href="#" className="mr-4 hover:underline cursor-pointer md:mr-6">Privacy Policy</Link>
           </li>
           <li>
-            <Link href="#" className="mr-4 hover:underline md:mr-6">Licensing</Link>
+            <Link href="/menu" className="mr-4 hover:underline cursor-pointer md:mr-6">Menu</Link>
           </li>
           <li>
-            <Link href="#" className="hover:underline">Contact</Link>
+            <Link href="/contact" className="hover:underline cursor-pointer">Contact</Link>
           </li>
         </ul>
       </div>

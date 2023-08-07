@@ -11,10 +11,10 @@ const MenuPage = () => {
           className="w-full h-1/3 bg-cover p-8 md:h-1/2"
           style={{ backgroundImage: `url(${category.img})` }}
         >
-          <div className={`text-${category.color} w-1/2`}>
-            <h1 className="uppercase font-bold text-3xl">{category.title}</h1>
-            <p className="text-xs md:text-sm my-2 md:my-8">{category.desc}</p>
-            <button className={`hidden 2xl:block bg-${category.color} text-${category.color === "black" ? "white" : "gold"} py-2 px-4 rounded-md`}>Explore</button>
+          <div className={`text-${category.color} w-full lg:w-1/2`}>
+            <h1 className="uppercase font-bold text-xl md:text-3xl">{category.title}</h1>
+            <p className="text-xs md:text-sm mb-1 md:my-2">{category.desc}</p>
+            <button className={`hidden 2xl:block bg-${category.color} text-${category.color === "black" ? "white" : "gold"} py-2 px-4 rounded-md cursor-pointer hover:bg-chelseaBlue duration-500`}>Explore</button>
           </div>
         </Link>
       ))}
