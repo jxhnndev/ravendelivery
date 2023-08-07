@@ -8,6 +8,8 @@ import Banner from './Banner'
 import Offer from './Offer'
 import Price from './Price'
 import Slider from './Slider'
+import BreadCrumb from './BreadCrumb'
+import Tabs from './Tabs'
 
 export {
     Navbar,
@@ -19,5 +21,7 @@ export {
     Banner,
     Offer,
     Price,
-    Slider
+    Slider,
+    BreadCrumb,
+    Tabs
 }
