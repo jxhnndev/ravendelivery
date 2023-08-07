@@ -14,9 +14,9 @@ const CategoryPage = () => {
             </div>
           )}
           {/* TEXT CONTAINER */}
-          <div className="flex items-center justify-between font-bold">
-            <h1 className="text-2xl uppercase p-2">{item.title}</h1>
-            <h2 className="group-hover:hidden text-xl">${item.price}</h2>
+          <div className="flex flex-wrap items-center justify-between font-bold">
+            <h1 className="text-base md:text-2xl uppercase p-2">{item.title}</h1>
+            <h2 className="group-hover:hidden text-lg md:text-xl">${item.price}</h2>
             <button className="hidden group-hover:block uppercase bg-gold text-white p-2 rounded-md">Add to Cart</button>
           </div>
         </Link>
