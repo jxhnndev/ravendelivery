@@ -6,6 +6,12 @@ export const productsQuery = groq`
  }
  `;
 
+export const productsPerCategoryQuery = groq`
+*[_type == "product" && $filter in categories[]->slug.current && !(_id in path('drafts.**'))] | order(_createdAt desc) {
+  ...,
+ }
+ `;
+
 export const sliderQuery = groq`
 *[_type == "sliderContent" && !(_id in path('drafts.**'))] | order(_createdAt desc) {
   ...,
