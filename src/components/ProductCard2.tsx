@@ -18,7 +18,7 @@ const ProductCard2 = ({item}: Props) => {
     >
           {/* IMAGE CONTAINER */}
           {item.image && (
-            <Link className="relative h-[80%]" href={`/product/${item._id}`} >
+            <Link className="relative h-[80%]" href={`/product/${item.slug?.current}`} >
               <Image 
                 src={imageProps.src}
                 loader={imageProps.loader}  

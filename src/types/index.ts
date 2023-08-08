@@ -8,7 +8,7 @@ export type Product = {
   img?: string;
   image?: {asset: {_ref: string} }
   price: number;
-  mainPrice?: number;
+  mainPrice: number;
   options?: { title: string; additionalPrice: number }[];
   priceOptions?: { title: string; additionalPrice: number }[];
   featured?: boolean;

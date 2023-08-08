@@ -1,14 +1,20 @@
 import { BreadCrumb, Price, Tabs } from '@/components'
 import { singleProduct } from '@/data'
+import { Product } from '@/types';
 import Image from 'next/image'
 import { BsStarFill } from 'react-icons/bs'
+import { getClient } from '../../../../utils/sanity';
+import { singleProductQuery } from '../../../../utils/queries';
 
 const links = [
   { id: 1, title: "Menu", url: "/menu" },
   { id: 2, title: "Pizzas", url: "/menu/pizzas" },
 ];
 
-const ProductPage = () => {
+const ProductPage = async ({ params }: { params: { slug: string } }) => {
+  const product: Product = await getClient().fetch(singleProductQuery, {
+    slug: params.slug
+  })
   return (
     <section className="py-12 sm:py-16"> 
       <div className="container mx-auto px-4">
@@ -68,7 +74,7 @@ const ProductPage = () => {
             </div>
           </div>
           <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-            <h1 className="sm: text-2xl font-bold text-gray-900 sm:text-3xl">{singleProduct.title}</h1>
+            <h1 className="sm: text-2xl font-bold text-gray-900 sm:text-3xl">{product.name}</h1>
             <div className="mt-5 flex items-center">
               <div className="flex items-center">
                 <BsStarFill className="block h-4 w-4 align-middle text-yellow-500"/>
@@ -81,7 +87,7 @@ const ProductPage = () => {
             </div>
           
             {/** PRICE */}
-            <Price price={singleProduct.price} id={singleProduct.id} options={singleProduct.options}/>
+            <Price price={product.mainPrice} id={product._id} options={product.priceOptions}/>
             {/** PRICE END*/}
 
             <ul className="mt-8 space-y-2">
