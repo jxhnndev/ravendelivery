@@ -1,18 +1,36 @@
+export type Asset = {
+  _ref: string
+};
+
+export type GalleryItemType = {
+  _key: string;
+  _type: string;
+  asset: Asset;
+}
+
+export type Gallery = {
+  display: string;
+  images: [
+    GalleryItemType
+  ];
+  zoom: boolean
+};
+
+export type ImageType = {
+  id?: string;
+  asset: Asset
+};
+
 export type Product = {
-  id?: number;
-  _id?: string;
-  title?: string;
-  name?: string;
-  slug?: {current: string};
-  desc?: string;
-  img?: string;
-  image?: {asset: {_ref: string} }
-  price: number;
+  _id: string;
+  name: string;
+  slug: {current: string};
+  image: ImageType
   mainPrice: number;
-  options?: { title: string; additionalPrice: number }[];
   priceOptions?: { title: string; additionalPrice: number }[];
-  featured?: boolean;
-  details?: string
+  featured: boolean;
+  details: string;
+  gallery?: Gallery;
 };
 
 export type Products = Product[];

@@ -23,7 +23,7 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
         <BreadCrumb links={links}/>
         <div className="lg:col-gap-12 xl:col-gap-16 mt-8 grid grid-cols-1 gap-12 lg:mt-12 lg:grid-cols-5 lg:gap-16">
           {/** */}
-          <ImageGallery images={product}/>
+          <ImageGallery image={product.image} gallery={product.gallery} />
            {/** */}
           <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
             <h1 className="sm: text-2xl font-bold text-gray-900 sm:text-3xl">{product.name}</h1>
