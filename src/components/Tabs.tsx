@@ -1,8 +1,9 @@
 "use client"
+import { Product } from "@/types"
 import { useState } from "react"
 
 type Props = {
-    data: any
+    data: Product
   }
 
 const Tabs = ({ data }: Props) => {
@@ -20,8 +21,8 @@ const Tabs = ({ data }: Props) => {
         </div>
 
         <div className={`${selected === 1 ? "" : "hidden"} mt-8 flow-root sm:mt-12`}>
-        <h1 className="text-3xl font-bold">{data.title}</h1>
-        <p className="mt-4">{data.desc}</p>
+        <h1 className="text-3xl font-bold">{data.name}</h1>
+        <p className="mt-4">{data.details}</p>
         </div>
 
         <div className={`${selected === 2 ? "" : "hidden"} mt-8 flow-root sm:mt-12`}>

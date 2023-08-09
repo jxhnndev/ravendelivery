@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react"
+import { BsPatchMinusFill, BsPatchPlusFill } from "react-icons/bs";
 
 type Props = {
   price: number;
@@ -39,13 +40,13 @@ const Price = ({ price, id, options }: Props) => {
               <button
                 onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}
               >
-                {"<"}
+                <BsPatchMinusFill className="h-5 w-5 text-gold hover:text-red-600 hover:scale-110 duration-500"/>
               </button>
-              <span>{quantity}</span>
+              <span className="font-bold text-chelseaBlue">{quantity}</span>
               <button
                 onClick={() => setQuantity((prev) => (prev < 9 ? prev + 1 : 9))}
               >
-                {">"}
+                <BsPatchPlusFill className="h-5 w-5 text-gold hover:text-green-600 hover:scale-110 duration-500"/>
               </button>
             </div>
         </div>
