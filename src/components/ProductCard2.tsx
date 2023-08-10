@@ -1,7 +1,7 @@
 "use client"
 import { Product } from "@/types"
 import Image from "next/image";
-import GetImage from "../../utils/getImage";
+import GetImage from "@/utils/getImage";
 import Link from "next/link";
 
 type Props = {

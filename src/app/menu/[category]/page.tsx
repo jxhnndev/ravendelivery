@@ -1,6 +1,6 @@
 import { Products } from '@/types'
-import { getClient } from '../../../../utils/sanity'
-import { productsPerCategoryQuery } from '../../../../utils/queries'
+import { getClient } from '@/utils/sanity'
+import { productsPerCategoryQuery } from '@/utils/queries'
 import ProductCard2 from '@/components/ProductCard2'
 
 type Props = {

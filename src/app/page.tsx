@@ -1,6 +1,6 @@
 import { Featured, Offer, Slider } from '@/components'
-import { getClient } from '../../utils/sanity';
-import { productsQuery, sliderQuery, specialOfferQuery } from '../../utils/queries';
+import { getClient } from '@/utils/sanity';
+import { productsQuery, sliderQuery, specialOfferQuery } from '@/utils/queries';
 import { OfferType, Products, SliderContents } from '@/types';
 
 export default async function Home() {

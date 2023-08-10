@@ -1,8 +1,8 @@
 "use client"
 
 import Image from 'next/image'
-import GetImage from '../../utils/getImage'
-import { Asset, GalleryItemType, ImageType } from '@/types';
+import GetImage from '@/utils/getImage'
+import { GalleryItemType } from '@/types';
 
 type Props = {
     image: GalleryItemType;

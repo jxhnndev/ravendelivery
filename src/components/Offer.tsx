@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import { CountDown } from '.'
 import { OfferType } from '@/types'
-import GetImage from '../../utils/getImage'
+import GetImage from '@/utils/getImage'
 
 type Props = {
   data: OfferType

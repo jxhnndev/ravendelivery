@@ -39,9 +39,9 @@ const Menu = () => {
           >
             {user ? "Orders" : "Login"}
           </Link>
-          <Link href="/cart" onClick={() => setOpen(false)}>
+          <div onClick={() => setOpen(false)}>
             <CartIcon />
-          </Link>
+          </div>
           <div className="flex items-center gap-2 cursor-pointer bg-chelseaBlue px-1 rounded-md">
             <Image src="/phone.png" alt="" width={20} height={20} />
             <span className='text-white'>123 456 78</span>

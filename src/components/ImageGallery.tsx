@@ -1,9 +1,9 @@
 "use client"
 
-import Image, { ImageLoader } from "next/image"
-import GetImage from "../../utils/getImage"
+import Image from "next/image"
+import GetImage from "@/utils/getImage"
 import { useState } from "react"
-import { Gallery, GalleryItemType, ImageType } from "@/types"
+import { Gallery, ImageType } from "@/types"
 import GalleryItem from "./GalleryItem"
 
 type Props = {

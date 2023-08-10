@@ -1,10 +1,8 @@
 import { BreadCrumb, Price, Tabs } from '@/components'
-import { singleProduct } from '@/data'
 import { Product } from '@/types';
-import Image from 'next/image'
 import { BsStarFill, BsCreditCard2Front } from 'react-icons/bs'
-import { getClient } from '../../../../utils/sanity';
-import { singleProductQuery } from '../../../../utils/queries';
+import { getClient } from '@/utils/sanity';
+import { singleProductQuery } from '@/utils/queries';
 import { GiDeliveryDrone } from 'react-icons/gi'
 import ImageGallery from '@/components/ImageGallery';
 

@@ -2,7 +2,7 @@
 import { SliderContents } from "@/types";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import GetImage from '../../utils/getImage';
+import GetImage from '@/utils/getImage';
 
 type Props = {
   data: SliderContents
