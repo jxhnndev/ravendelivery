@@ -38,7 +38,7 @@ export const ordersQuery = groq`
  `;
 
 export const userOrdersQuery = groq`
-*[_type == "order" && !(_id in path('drafts.**'))] && orderedBy.email == $email | order(_createdAt desc) {
+*[_type == "order" && orderedBy._ref in *[_type=="user" && email==$email]._id && !(_id in path('drafts.**'))]| order(_createdAt desc) {
   ...,
  }
  `;

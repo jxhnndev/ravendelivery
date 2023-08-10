@@ -1,3 +1,11 @@
+export type UserType = {
+  _id: string;
+  email: string;
+  image: string;
+  isAdmin: boolean;
+  name: string;
+};
+
 export type Asset = {
   _ref: string
 };
@@ -66,4 +74,35 @@ export type OfferType = {
   image?: {asset: {_ref: string} };
   buttonTitle: string;
   endDate: string;
+}
+
+export type CartType = {
+  products: CartItemType[];
+  totalItems: number;
+  totalPrice: number;
+};
+
+export type CartItemType = {
+  id: string;
+  title: string;
+  img?: string;
+  price: number;
+  optionTitle?: string;
+  quantity: number;
+};
+
+export type OrderType = {
+  _id: string;
+  _createdAt: Date;
+  orderedBy: UserType;
+  price: number;
+ // products: CartItemType[];
+  products: string[];
+  status: string;
+  intent_id?: String;
+};
+
+export type ActionTypes = {
+  addToCart:(item:CartItemType)=> void;
+  removeFromCart:(item:CartItemType)=> void;
 }

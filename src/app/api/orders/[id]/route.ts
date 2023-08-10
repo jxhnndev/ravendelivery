@@ -1,4 +1,5 @@
 
+import client from "@/utils/sanity";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -10,9 +11,15 @@ export const PUT = async (
   const { id } = params;
 
   try {
-    const body = await req.json();
+    const updatedStatus = await req.json();
 
-    console.log("I was called", body)
+    // post data to sanity db
+    await client
+    .patch(id)
+    .set({
+        status: updatedStatus
+      })
+    .commit();
     return new NextResponse(
       JSON.stringify({ message: "Order has been updated!" }),
       { status: 200 }
