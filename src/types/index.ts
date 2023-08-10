@@ -89,6 +89,7 @@ export type CartItemType = {
   price: number;
   optionTitle?: string;
   quantity: number;
+  slug: string;
 };
 
 export type OrderType = {

@@ -37,7 +37,7 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
             </div>
           
             {/** PRICE */}
-            <Price price={product.mainPrice} id={product._id} options={product.priceOptions}/>
+            <Price product={product}/>
             {/** PRICE END*/}
 
             <ul className="mt-8 space-y-2">

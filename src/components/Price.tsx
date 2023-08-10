@@ -1,30 +1,54 @@
 "use client";
 
+import { Product } from "@/types";
+import GetImage from "@/utils/getImage";
+import { useCartStore } from "@/utils/store";
 import { useEffect, useState } from "react"
 import { BsPatchMinusFill, BsPatchPlusFill } from "react-icons/bs";
+import { toast } from "react-toastify"
 
-type Props = {
-  price: number;
-  id?: string;
-  options?: { title: string; additionalPrice: number }[];
-}
+const Price = ({ product }: { product: Product }) => {
+  const [total, setTotal] = useState(product.mainPrice)
+  const [quantity, setQuantity] = useState(1)
+  const [selected, setSelected] = useState(0)
+  const imageProps: any = product.image
+    ? GetImage(product.image)
+    : null
 
-const Price = ({ price, id, options }: Props) => {
-  const [total, setTotal] = useState(price);
-  const [quantity, setQuantity] = useState(1);
-  const [selected, setSelected] = useState(0);
+  const { addToCart } = useCartStore()
+
+  useEffect(()=>{
+    useCartStore.persist.rehydrate()
+  },[])
 
   useEffect(() => {
-    setTotal(
-      quantity * (options ? price + options[selected].additionalPrice : price)
-    );
-  }, [quantity, selected, options, price])
+    if (product.priceOptions?.length) {
+      setTotal(
+        quantity * product.mainPrice + product.priceOptions[selected].additionalPrice
+      );
+    }
+  }, [quantity, selected, product])
+
+  const handleCart = ()=>{
+    addToCart({
+      id: product._id,
+      title: product.name,
+      img: imageProps,
+      price: total,
+      ...(product.priceOptions?.length && {
+        optionTitle: product.priceOptions[selected].title,
+      }),
+      quantity: quantity,
+      slug: product.slug.current,
+    })
+    toast.success("The product added to the cart!")
+  }
 
   return (
       <>
         <h2 className="mt-8 text-base text-gray-900">Select Size</h2>
         <div className="mt-3 flex select-none flex-wrap items-center gap-1">
-          {options?.map((option, index) => (
+          {product.priceOptions?.map((option, index) => (
           <button key={option.title} onClick={() => setSelected(index)} className="mt-2 text-xs sm:text-base">
             <span className={`rounded-lg border border-gold px-6 py-2 font-bold capitalize ${selected === index ? "bg-gold text-white" : "bg-white text-gold"}`}>
               {option.title}
@@ -57,7 +81,8 @@ const Price = ({ price, id, options }: Props) => {
             <span className="text-base pl-1">Total</span>
           </div>
           <button 
-            type="button" 
+            type="button"
+            onClick={handleCart} 
             className="rounded-md border-2 border-transparent bg-gold hover:bg-chelseaBlue px-2 py-2 text-center text-base font-bold text-white transition-all duration-500 ease-in-out"
             >
             Add to cart
