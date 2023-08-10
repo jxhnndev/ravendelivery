@@ -1,6 +1,9 @@
-import React from 'react'
+"use client"
+import { useSession } from "next-auth/react"
 
 const OrdersPage = () => {
+  const { data: session, status } = useSession()
+  console.log(session)
   return (
     <div className="p-4 lg:px-20 xl:px-40">
       <table className="w-full border-separate border-spacing-3">

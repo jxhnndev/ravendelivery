@@ -2,6 +2,7 @@ import { NextAuthOptions, User, getServerSession } from "next-auth";
 import { SanityAdapter } from 'next-auth-sanity';
 import GoogleProvider from "next-auth/providers/google";
 import client from "./sanity";
+import { singleUserQuery } from "./queries";
 
 declare module "next-auth" {
   interface Session {
@@ -34,11 +35,11 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
+    // check user in db and add if user is admin info to the token
     async jwt({ token }) {
-      const userInDb = {
-        isAdmin: true,
-        email: "test@test.com"
-      };
+      const userInDb = await client.fetch(singleUserQuery, {
+        email: token.email!
+      })
       token.isAdmin = userInDb?.isAdmin!;
       return token;
     },

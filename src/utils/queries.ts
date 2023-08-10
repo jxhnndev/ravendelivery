@@ -1,5 +1,11 @@
 import { groq } from "next-sanity"
 
+export const singleUserQuery = groq`
+*[_type == "user" && !(_id in path('drafts.**')) && email == $email][0] {
+  ...,
+}
+`;
+
 export const productsQuery = groq`
 *[_type == "product" && !(_id in path('drafts.**'))] | order(_createdAt desc) {
   ...,
@@ -27,6 +33,12 @@ export const sliderQuery = groq`
 
 export const ordersQuery = groq`
 *[_type == "order" && !(_id in path('drafts.**'))] | order(_createdAt desc) {
+  ...,
+ }
+ `;
+
+export const userOrdersQuery = groq`
+*[_type == "order" && !(_id in path('drafts.**'))] && orderedBy.email == $email | order(_createdAt desc) {
   ...,
  }
  `;
