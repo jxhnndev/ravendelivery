@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { OrderType } from "@/types";
 import { FiEdit } from 'react-icons/fi'
 import { BASE_URL } from "@/utils";
+import { toast } from "react-toastify";
 
 const OrdersPage = () => {
   const { data: session, status } = useSession()
@@ -44,7 +45,7 @@ const OrdersPage = () => {
     const status = input.value;
 
     mutation.mutate({ id, status });
-    alert(`The order ${id} status has been changed!`)
+    toast.success(`The order ${id} status has been changed!`)
   };
 
   if (isLoading || status === "loading") return "Loading...";
@@ -55,6 +56,7 @@ const OrdersPage = () => {
     <>
     {status === "authenticated" ?
     <div className="p-4 lg:px-20 xl:px-40 overflow-y-auto">
+      {data ? 
       <table className="w-full border-separate border-spacing-3">
         <thead>
           <tr className="text-left">
@@ -94,6 +96,7 @@ const OrdersPage = () => {
           ))}
         </tbody>
       </table>
+      : "Something went wrong"}
     </div>
     : <div>Unauthenticated, redirecting to login...</div>}
     </>
