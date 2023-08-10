@@ -10,7 +10,7 @@ type Props = {
 const CategoryPage = async ({params}:Props) => {
   const products: Products = await getClient().fetch(productsPerCategoryQuery, {
     filter: params.category
-  })
+  }) // change this with api requests instead so that deleted product doesn't need refresh
   return (
     <div className="flex flex-wrap text-gold">
       {products.map((item) => (

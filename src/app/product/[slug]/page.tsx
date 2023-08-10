@@ -5,6 +5,7 @@ import { getClient } from '@/utils/sanity';
 import { singleProductQuery } from '@/utils/queries';
 import { GiDeliveryDrone } from 'react-icons/gi'
 import ImageGallery from '@/components/ImageGallery';
+import DeleteButton from '@/components/DeleteButton';
 
 const links = [
   { id: 1, title: "Menu", url: "/menu" },
@@ -19,6 +20,7 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
     <section className="py-12 sm:py-16"> 
       <div className="container mx-auto px-4">
         <BreadCrumb links={links}/>
+        {product ? 
         <div className="lg:col-gap-12 xl:col-gap-16 mt-8 grid grid-cols-1 gap-12 lg:mt-12 lg:grid-cols-5 lg:gap-16">
           {/** */}
           <ImageGallery image={product.image} gallery={product.gallery} />
@@ -34,6 +36,7 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
                 <BsStarFill className="block h-4 w-4 align-middle text-yellow-500"/>
               </div>
               <p className="ml-2 text-sm font-medium text-gray-500">1,209 Reviews</p>
+              <DeleteButton id={product._id} />
             </div>
           
             {/** PRICE */}
@@ -56,6 +59,7 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
           <Tabs data={product}/>
           {/**TABS END*/}
         </div>
+        : ""}
       </div>
     </section>
   )
