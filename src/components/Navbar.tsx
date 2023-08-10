@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { CartIcon, Menu } from '.'
+import UserLinks from './UserLinks'
 
 const Navbar = () => {
-  const user = false
   return (
     <div className="h-12 text-gold p-4 flex items-center justify-between border-b-2 border-b-gold uppercase md:h-24 lg:px-20 xl:px-40">
       {/* LEFT LINKS */}
@@ -26,11 +26,7 @@ const Navbar = () => {
           <Image src="/phone.png" alt="" width={20} height={20} />
           <span className='text-white text-xs'>123 456 78</span>
         </div>
-        {!user ? (
-          <Link href="/login" className='cursor-pointer hover:text-chelseaBlue'>Login</Link>
-        ) : (
-          <Link href="/orders" className='cursor-pointer hover:text-chelseaBlue'>Orders</Link>
-        )}
+        <UserLinks />
         <CartIcon />
       </div>
     </div>

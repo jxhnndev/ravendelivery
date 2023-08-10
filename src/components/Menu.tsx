@@ -1,5 +1,6 @@
 "use client"
 
+import { signOut, useSession } from "next-auth/react"
 import Link from 'next/link';
 import { useState } from 'react'
 import { CartIcon } from '.';
@@ -17,7 +18,7 @@ const links = [
 const Menu = () => {
   const [open, setOpen] = useState(false)
 
-  const user = false
+  const { status } = useSession()
 
   return (
     <div>
@@ -34,11 +35,16 @@ const Menu = () => {
             </Link>
           ))}
           <Link
-            href={user ? "/orders" : "login"}
+            href={status === "authenticated" ? "/orders" : "login"}
             onClick={() => setOpen(false)}
           >
-            {user ? "Orders" : "Login"}
+            {status === "authenticated" ? "Orders" : "Login"}
           </Link>
+          {status === "authenticated" ?
+          <button className="uppercase" onClick={() => signOut()}>
+            Logout
+          </button>
+          : "" }
           <div onClick={() => setOpen(false)}>
             <CartIcon />
           </div>
