@@ -1,5 +1,5 @@
 import { getAuthSession } from "@/utils/auth";
-import { ordersQuery, userOrdersQuery } from "@/utils/queries";
+import { ordersQuery, singleUserQuery, userOrdersQuery } from "@/utils/queries";
 import client from "@/utils/sanity";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -33,13 +33,28 @@ export const GET = async (req: NextRequest) => {
 };
 
 // CREATE ORDER
-export const POST = async (req: NextRequest) => {
+export const POST = async (req: NextRequest, res: NextResponse) => {
   const session = await getAuthSession();
 
   if (session) {
     try {
       const body = await req.json();
-      const order = "order will be created here";
+      const orderedBy = await client.fetch(singleUserQuery, {
+        email: body.userEmail
+      })
+     
+      const doc = {
+        _type: "order",
+        orderedBy: {
+          _ref: orderedBy._id,
+          _type: "reference"
+        },
+        price: body.price,
+        products: ["test", "test 2", "teeeeeeeeeest"], // here need to pass actual products
+        status: body.status
+      }
+      const order = await client.create(doc)
+
       return new NextResponse(JSON.stringify(order), { status: 201 });
     } catch (err) {
       console.log(err);
