@@ -1,16 +1,15 @@
 
 import { orderByIntentIdQuery } from "@/utils/queries";
 import client from "@/utils/sanity";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export const PUT = async ({ params }: { params: { intentId: string } }) => {
+export const PUT = async (request: NextRequest, 
+  { params }: { params: { intentId: string } }) => {
   const { intentId } = params;
-  console.log(intentId)
 
   const order = await client.fetch(orderByIntentIdQuery, {
     intent_id: intentId
   })
-  console.log(order)
 
   try {
     await client

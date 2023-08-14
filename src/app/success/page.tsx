@@ -8,32 +8,32 @@ const SuccessPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const payment_intent = searchParams.get("payment_intent");
-// pi_3NdwMPETXSG0EClL0JY1hog8
+
   const makeRequest = async () => {
-    try {
-      console.log("PI", payment_intent)
-      const intentId = "pi_3NdwZYETXSG0EClL1V6l28RX"
-      await fetch(`${BASE_URL}/api/confirm/${intentId}`, {
-        method: "PUT",
-      });
-      setTimeout(() => {
-    //   router.push("/orders");
-    console.log(payment_intent)
+    if (payment_intent) {
+      try {
+        await fetch(`${BASE_URL}/api/confirm/${payment_intent}`, {
+          method: "PUT",
+        });
+        setTimeout(() => {
+        router.push("/orders");
       }, 5000);
-    } catch (err) {
-      console.log(err);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      alert("Something went wrong, contact us and we will check the payment status")
     }
   };
 
-  useEffect(() => {
 
-   // makeRequest();
-   console.log("dsadsad")
+  useEffect(() => {
+    makeRequest();
   }, [payment_intent, router]);
+
 
   return (
     <>
-   {/* <button className="bg-red-500 h-8 w-8" onClick={makeRequest}>RUN</button> needs fix, make this using webhook instead* */}
       <div className="min-h-[calc(100vh-6rem)] md:min-h-[calc(100vh-15rem)] flex items-center justify-center text-center text-2xl text-green-700">
         <p className="max-w-[600px]">
           Payment successful. You are being redirected to the orders page.

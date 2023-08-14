@@ -14,11 +14,8 @@ const PaymentPage = ({ params }: { params: { id: string } }) => {
   const [clientSecret, setClientSecret] = useState("");
 
   const { id } = params;
-  console.log(id)
 
   const makeRequest = async () => {
-    console.log("cliiicked")
-    console.log("id", id)
     try {
       const res = await fetch(
         `${BASE_URL}/api/create-intent/${id}`,
@@ -34,8 +31,7 @@ const PaymentPage = ({ params }: { params: { id: string } }) => {
   };
 
   useEffect(() => {
-   // makeRequest();
-    console.log("I was ran")
+    makeRequest();
   }, [id]);
 
   const options:StripeElementsOptions={
@@ -47,8 +43,6 @@ const PaymentPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <div>
-      <button className="bg-gold h-8 w-8" onClick={makeRequest}>Load Payment Form</button>
-      <p>temporary button, this will be replaced in post beta version</p>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />
