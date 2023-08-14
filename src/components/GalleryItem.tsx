@@ -6,7 +6,7 @@ import { GalleryItemType } from '@/types';
 
 type Props = {
     image: GalleryItemType;
-    selected?: string;
+    selected?: boolean;
     handleClick: () => void;
   }
 
@@ -15,7 +15,7 @@ const GalleryItem = ({image, selected, handleClick}: Props) => {
     ? GetImage(image)
     : null
   return (
-    <button onClick={handleClick} type="button" className={`flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 ${selected === image._key ? "border-gray-900" : "border-transparent"}  text-center`}>       
+    <button onClick={handleClick} type="button" className={`flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 ${selected ? "border-gray-900" : "border-transparent"}  text-center`}>       
         <Image
             src={imageProps.src}
             loader={imageProps.loader}  

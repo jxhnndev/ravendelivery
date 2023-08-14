@@ -27,7 +27,7 @@ const Slider = ({data}: Props) => {
   }, []);
 
   return (
-    <div className="flex flex-col h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] lg:flex-row bg-lightGold">
+    <div className="flex flex-col h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] lg:flex-row bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200">
       {/* TEXT CONTAINER */}
       <div className="flex-1 flex items-center justify-center flex-col gap-8 text-gold font-bold mb-5 px-2">
         <h1 className="flex w-full justify-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center uppercase min-h-[200px] items-center">

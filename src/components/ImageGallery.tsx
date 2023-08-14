@@ -51,7 +51,7 @@ const ImageGallery = ({image, gallery}: Props) => {
                 <GalleryItem 
                     key={img._key} 
                     image={img} 
-                    selected={selectedImage.id} 
+                    selected={selectedImage.id === img._key} 
                     handleClick={() => handleSelect(img.asset._ref, img._key)}
                 />
             ))}

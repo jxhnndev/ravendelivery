@@ -4,6 +4,7 @@ import Image from "next/image";
 import GetImage from "@/utils/getImage";
 import { useCartStore } from "@/utils/store";
 import { toast } from "react-toastify"
+import Link from "next/link";
 
 type Props = {
     item: Product
@@ -45,7 +46,7 @@ const ProductCard = ({item}: Props) => {
         )}
         {/* TEXT CONTAINER */}
         <div className=" flex-1 flex flex-col items-center justify-center text-center gap-4">
-            <h1 className="text-xl font-bold uppercase xl:text-2xl 2xl:text-3xl mt-5">{item.name}</h1>
+            <Link href={`/product/${item.slug.current}`} className="text-xl font-bold uppercase xl:text-2xl 2xl:text-3xl mt-5 cursor-pointer hover:text-chelseaBlue">{item.name}</Link>
             <p className="p-4 2xl:p-8">{item.details}</p>
             <span className="text-xl font-bold">${item.mainPrice}</span>
             <button onClick={handleCart} className="bg-chelseaBlue hover:bg-gold duration-500 text-white p-2 rounded-md cursor-pointer">

@@ -41,7 +41,7 @@ const Menu = () => {
             {status === "authenticated" ? "Orders" : "Login"}
           </Link>
           {status === "authenticated" ?
-          <button className="uppercase" onClick={() => signOut()}>
+          <button className="uppercase bg-gold hover:bg-red-700 duration-700 rounded-md px-2 py-1" onClick={() => signOut()}>
             Logout
           </button>
           : "" }

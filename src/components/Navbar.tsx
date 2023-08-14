@@ -8,13 +8,13 @@ const Navbar = () => {
     <div className="h-12 text-gold p-4 flex items-center justify-between border-b-2 border-b-gold uppercase md:h-24 lg:px-20 xl:px-40">
       {/* LEFT LINKS */}
       <div className="hidden md:flex gap-4 flex-1 font-semibold">
-        <Link href="/menu" className='cursor-pointer hover:text-chelseaBlue'>Menu</Link>
-        <Link href="/about" className='cursor-pointer hover:text-chelseaBlue'>About</Link>
-        <Link href="/contact" className='cursor-pointer hover:text-chelseaBlue'>Contact</Link>
+        <Link href="/menu" className='cursor-pointer hover:text-chelseaBlue duration-700'>Menu</Link>
+        <Link href="/about" className='cursor-pointer hover:text-chelseaBlue duration-700'>About</Link>
+        <Link href="/contact" className='cursor-pointer hover:text-chelseaBlue duration-700'>Contact</Link>
       </div>
       {/* LOGO */}
       <div className="text-xl font-bold flex-1 md:text-center">
-        <Link href="/" className='cursor-pointer hover:text-chelseaBlue'>RavenDelivery</Link>
+        <Link href="/" className='cursor-pointer hover:text-chelseaBlue duration-700'>RavenDelivery</Link>
       </div>
       {/* MOBILE MENU */}
       <div className="md:hidden">
