@@ -3,12 +3,14 @@ import Image from 'next/image'
 import { CountDown } from '.'
 import { OfferType } from '@/types'
 import GetImage from '@/utils/getImage'
+import { useRouter } from 'next/navigation';
 
 type Props = {
   data: OfferType
 }
 
 const Offer = ({data}: Props) => {
+  const router = useRouter()
   const imageProps: any = data?.image
     ? GetImage(data.image)
     : null
@@ -22,7 +24,12 @@ const Offer = ({data}: Props) => {
           {data.description}
         </p>
         <CountDown endDate={data.endDate}/>
-        <button className="bg-chelseaBlue text-white rounded-md py-3 px-6 hover:bg-gold duration-500 cursor-pointer">{data.buttonTitle}</button>
+        <button
+          onClick={() => router.push('/menu/burgers')} 
+          className="bg-chelseaBlue text-white rounded-md py-3 px-6 hover:bg-gold duration-500 cursor-pointer"
+        >
+          {data.buttonTitle}
+        </button>
       </div>
       {/* IMAGE CONTAINER */}
       <div className="flex-1 w-full relative md:h-full">

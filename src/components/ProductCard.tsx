@@ -2,6 +2,8 @@
 import { Product } from "@/types"
 import Image from "next/image";
 import GetImage from "@/utils/getImage";
+import { useCartStore } from "@/utils/store";
+import { toast } from "react-toastify"
 
 type Props = {
     item: Product
@@ -11,6 +13,20 @@ const ProductCard = ({item}: Props) => {
     const imageProps: any = item?.image
     ? GetImage(item.image)
     : null
+
+    const { addToCart } = useCartStore()
+
+    const handleCart = ()=>{
+        addToCart({
+          id: item._id,
+          title: item.name,
+          img: imageProps,
+          price: item.mainPrice,
+          quantity: 1,
+          slug: item.slug.current,
+        })
+        toast.success("The product added to the cart!")
+      }
   return (
     <div
         className="w-screen h-[80vh] flex flex-col items-center justify-around p-4 hover:bg-lightGold transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh]"
@@ -32,7 +48,7 @@ const ProductCard = ({item}: Props) => {
             <h1 className="text-xl font-bold uppercase xl:text-2xl 2xl:text-3xl mt-5">{item.name}</h1>
             <p className="p-4 2xl:p-8">{item.details}</p>
             <span className="text-xl font-bold">${item.mainPrice}</span>
-            <button className="bg-chelseaBlue hover:bg-gold duration-500 text-white p-2 rounded-md cursor-pointer">
+            <button onClick={handleCart} className="bg-chelseaBlue hover:bg-gold duration-500 text-white p-2 rounded-md cursor-pointer">
                 Add to Cart
             </button>
         </div>

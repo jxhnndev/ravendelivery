@@ -3,6 +3,7 @@ import { SliderContents } from "@/types";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import GetImage from '@/utils/getImage';
+import { useRouter } from "next/navigation";
 
 type Props = {
   data: SliderContents
@@ -10,6 +11,7 @@ type Props = {
 
 const Slider = ({data}: Props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const router = useRouter()
   
   const imageProps: any = data[currentSlide]?.image
     ? GetImage(data[currentSlide].image)
@@ -31,7 +33,7 @@ const Slider = ({data}: Props) => {
         <h1 className="flex w-full justify-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center uppercase min-h-[200px] items-center">
           {data[currentSlide].title}
         </h1>
-        <button className="bg-chelseaBlue text-white py-4 px-8 rounded-md hover:bg-gold duration-500 cursor-pointer">Order Now</button>
+        <button onClick={() => router.push('/menu')} className="bg-chelseaBlue text-white py-4 px-8 rounded-md hover:bg-gold duration-500 cursor-pointer">Order Now</button>
       </div>
       {/* IMAGE CONTAINER */}
       <div className="w-full flex-1 relative">
