@@ -106,4 +106,5 @@ export type OrderType = {
 export type ActionTypes = {
   addToCart:(item:CartItemType)=> void;
   removeFromCart:(item:CartItemType)=> void;
+  resetCart:()=>void;
 }

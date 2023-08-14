@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 
 const CartPage = () => {
-  const { products, totalItems, totalPrice, removeFromCart } = useCartStore();
+  const { products, totalItems, totalPrice, removeFromCart, resetCart } = useCartStore();
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -19,7 +19,7 @@ const CartPage = () => {
   const handleCheckout = async () => {
     if (!session) {
       router.push("/login");
-    } else {
+    } else if (products.length > 0) {
       try {
         const res = await fetch(`${BASE_URL}/api/orders`, {
           method: "POST",
@@ -36,6 +36,8 @@ const CartPage = () => {
       } catch (err) {
         console.log(err);
       }
+    } else {
+      alert("please add products first")
     }
   };
   return (
@@ -86,11 +88,18 @@ const CartPage = () => {
           <span className="">TOTAL(INCL. VAT)</span>
           <span className="font-bold">$ {totalPrice.toFixed(2)}</span>
         </div>
-        <button 
-          className="bg-gold hover:bg-chelseaBlue duration-500 text-white p-3 rounded-md w-1/2 self-end"
+        <button
+          disabled={products.length > 0 ? false : true} 
+          className={` duration-500 text-white p-3 rounded-md w-1/2 self-end ${(products.length > 0) ? "bg-gold hover:bg-chelseaBlue" : "bg-gold/80 opacity-80 cursor-not-allowed"}`}
           onClick={handleCheckout}
         >
           CHECKOUT
+        </button>
+        <button 
+          className="bg-red-500 hover:bg-chelseaBlue duration-500 text-white p-3 rounded-md w-1/2 self-end"
+          onClick={resetCart}
+        >
+          Clear Cart
         </button>
       </div>
     </div>
