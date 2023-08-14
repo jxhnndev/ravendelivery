@@ -21,9 +21,6 @@ const Footer = () => {
             <Link href="/about" className="mr-4 hover:underline cursor-pointer md:mr-6 ">About</Link>
           </li>
           <li>
-            <Link href="#" className="mr-4 hover:underline cursor-pointer md:mr-6">Privacy Policy</Link>
-          </li>
-          <li>
             <Link href="/menu" className="mr-4 hover:underline cursor-pointer md:mr-6">Menu</Link>
           </li>
           <li>
