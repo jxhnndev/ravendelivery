@@ -28,7 +28,7 @@ const Menu = () => {
       <BiSolidFoodMenu className="w-5 h-5 cursor-pointer" onClick={() => setOpen(!open)}/>
       }
       {open && (
-        <div className="bg-gold text-white absolute left-0 top-24 w-full h-[calc(100vh-6rem)] flex flex-col gap-8 items-center justify-center text-3xl z-10">
+        <div className="bg-chelseaBlue text-white absolute left-0 top-24 w-full h-[calc(100vh-6rem)] flex flex-col gap-8 items-center justify-center text-3xl z-10">
           {links.map((item) => (
             <Link href={item.url} key={item.id} onClick={() => setOpen(false)}>
               {item.title}
@@ -46,9 +46,9 @@ const Menu = () => {
           </button>
           : "" }
           <div onClick={() => setOpen(false)}>
-            <CartIcon />
+            Cart <CartIcon />
           </div>
-          <div className="flex items-center gap-2 cursor-pointer bg-chelseaBlue px-1 rounded-md">
+          <div className="flex items-center gap-2 cursor-pointer bg-gold px-1 rounded-md">
             <Image src="/phone.png" alt="" width={20} height={20} />
             <span className='text-white'>123 456 78</span>
           </div>
