@@ -37,3 +37,4 @@ next-env.d.ts
 
 #testpages
 /src/app/test
+/src/app/add
