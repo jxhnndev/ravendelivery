@@ -23,6 +23,7 @@ const ProductCard2 = ({item}: Props) => {
           title: item.name,
           img: imageProps,
           price: item.mainPrice,
+          itemPrice: item.mainPrice,
           quantity: 1,
           slug: item.slug.current,
         })

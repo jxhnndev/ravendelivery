@@ -35,6 +35,7 @@ const Price = ({ product }: { product: Product }) => {
       title: product.name,
       img: imageProps,
       price: total,
+      itemPrice: product.mainPrice,
       ...(product.priceOptions?.length && {
         optionTitle: product.priceOptions[selected].title,
       }),
