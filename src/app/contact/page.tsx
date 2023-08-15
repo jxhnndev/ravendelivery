@@ -6,7 +6,7 @@ const Contact = () => {
     const { data: session, status } = useSession();
     const [submitted, setSubmitted] = useState<boolean>(false)
   return (
-    <section className="py-6 text-chelseaBlue h-screen">
+    <section className="py-6 text-chelseaBlue min-h-screen">
         <div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x md:py-28">
             <div className="py-6 md:py-0 md:px-6">
                 <h1 className="text-4xl font-bold text-gold">Get in touch</h1>
