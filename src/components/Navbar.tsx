@@ -13,7 +13,7 @@ const Navbar = () => {
         <Link href="/contact" className='cursor-pointer hover:text-chelseaBlue duration-700'>Contact</Link>
       </div>
       {/* LOGO */}
-      <div className="text-xl font-bold flex-1 md:text-center">
+      <div className="text-sm sm:text-lg md:text-xl font-bold flex-1 md:text-center">
         <Link href="/" className='cursor-pointer hover:text-chelseaBlue duration-700'>RavenDelivery</Link>
       </div>
       {/* MOBILE MENU */}

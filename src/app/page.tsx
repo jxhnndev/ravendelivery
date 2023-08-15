@@ -2,6 +2,7 @@ import { Featured, Offer, Slider } from '@/components'
 import { getClient } from '@/utils/sanity';
 import { productsQuery, sliderQuery, specialOfferQuery } from '@/utils/queries';
 import { OfferType, Products, SliderContents } from '@/types';
+import Banner2 from '@/components/Banner2';
 
 export default async function Home() {
   const products: Products = await getClient().fetch(productsQuery)
@@ -17,6 +18,7 @@ export default async function Home() {
      * */}
       <Featured data={featured}/>
       <Offer data={offer}/>
+      <Banner2/>
     </main>
   )
 }
