@@ -12,18 +12,21 @@ type Props = {
   }
 
 const ImageGallery = ({image, gallery}: Props) => {
-    const [selectedImage, setSelectedImage] = useState(image)
+    const [selectedImage, setSelectedImage] = useState(gallery?.images[0])
     const imageProps: any = selectedImage
     ? GetImage(selectedImage)
+    : (!selectedImage && image) 
+    ? GetImage(image)
     : null
-// TODO highlight first item in array on page load
+// TODO 
 //Preloading fix needed here was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
     const handleSelect = (source: string, id: string) => {
         
         setSelectedImage(
             {
                 asset: {_ref: source},
-                id: id
+                _key: id,
+                _type: "image"
             }
         )
     }
@@ -51,7 +54,7 @@ const ImageGallery = ({image, gallery}: Props) => {
                 <GalleryItem 
                     key={img._key} 
                     image={img} 
-                    selected={selectedImage.id === img._key} 
+                    selected={selectedImage?._key === img._key} 
                     handleClick={() => handleSelect(img.asset._ref, img._key)}
                 />
             ))}
