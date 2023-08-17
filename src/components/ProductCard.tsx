@@ -17,14 +17,22 @@ const ProductCard = ({item}: Props) => {
 
     const { addToCart } = useCartStore()
 
+    
+      
+     
+    
+
     const handleCart = ()=>{
         addToCart({
           id: item._id,
           title: item.name,
           img: imageProps,
-          price: item.mainPrice,
           itemPrice: item.mainPrice,
+          price: item.mainPrice,
           quantity: 1,
+          optionTitle: "small",
+          tax: 1,
+          taxPrice: 1,
           slug: item.slug.current,
         })
         toast.success("The product added to the cart!")

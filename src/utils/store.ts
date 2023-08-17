@@ -17,16 +17,19 @@ export const useCartStore = create(
       addToCart(item) {
         const products = get().products;
         const productInState = products.find(
-          (product) => product.id === item.id // add this to add sizes separately or come up with diff solution && product.optionTitle === item.optionTitle
+          (product) => (product.id === item.id && product.optionTitle === item.optionTitle) // add this to add sizes separately or come up with diff solution && product.optionTitle === item.optionTitle
         );
 
         if (productInState) {
           const updatedProducts = products.map((product) =>
-            product.id === productInState.id
+            product.id + product.optionTitle!.replace(/\s/g, '') === productInState.id + productInState.optionTitle!.replace(/\s/g, '') // BUG TO FIX, here we should add small to small, medium to medium, etc.
               ? {
                   ...item,
                   quantity: item.quantity + product.quantity,
                   price: item.price + product.price,
+                //  itemPrice: item.itemPrice + product.itemPrice,
+                //  tax: item.tax + product.tax,
+                //  taxPrice: item.taxPrice + product.taxPrice,
                 }
               : item
           );
@@ -45,7 +48,7 @@ export const useCartStore = create(
       },
       removeFromCart(item) {
         set((state) => ({
-          products: state.products.filter((product) => product.id !== item.id),
+          products: state.products.filter((product) => (product.id! + product.optionTitle!.replace(/\s/g, '') !== item.id! + item.optionTitle!.replace(/\s/g, '') ) ),
           totalItems: state.totalItems - item.quantity,
           totalPrice: state.totalPrice - item.price,
         }));

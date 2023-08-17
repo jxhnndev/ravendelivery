@@ -33,13 +33,16 @@ const Price = ({ product }: { product: Product }) => {
     addToCart({
       id: product._id,
       title: product.name,
+     // test: product._id + product.name.replace(/\s/g, ''),
       img: imageProps,
-      price: total,
       itemPrice: product.mainPrice,
+      price: total,
+      quantity: quantity,
       ...(product.priceOptions?.length && {
         optionTitle: product.priceOptions[selected].title,
       }),
-      quantity: quantity,
+      tax: 1,
+      taxPrice: 1,
       slug: product.slug.current,
     })
     toast.success("The product added to the cart!")

@@ -83,7 +83,8 @@ export type CartType = {
 };
 
 export type CartItemType = {
-  _key: string;
+  id?: string;
+  _key?: string;
   title: string;
   img?: string;
   price: number;
@@ -92,7 +93,7 @@ export type CartItemType = {
   taxPrice: number;
   optionTitle?: string;
   quantity: number;
-  slug: string;
+  slug?: string;
 };
 
 export type OrderType = {
