@@ -28,7 +28,13 @@ const CartPage = () => {
           body: JSON.stringify({
             price: totalPrice,
             products,
-            status: "Not Paid!",
+            paymentMethod: "card",
+            paymentStatus: "Not Paid",
+            shippingPrice: 0,
+            status: "Pending",
+            tax: 3,
+            taxPrice: 15,
+            itemsPrice: 14,
             userEmail: session.user.email,
           }),
         });
@@ -82,7 +88,7 @@ const CartPage = () => {
                       <div className="px-4 mb-3">
                         <div className="h-24 w-24">
                           {item.img && (
-                            <Image src={item.img} alt="" width={100} height={100} className="object-cover w-full h-full cursor-pointer hover:scale-110 duration-700" />
+                            <Image src={item.img.src} alt="" width={100} height={100} className="object-cover w-full h-full cursor-pointer hover:scale-110 duration-700" />
                           )}
                         </div>
                       </div>

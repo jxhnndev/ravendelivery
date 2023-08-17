@@ -1,7 +1,9 @@
+import { CartItemType } from "@/types";
 import { getAuthSession } from "@/utils/auth";
 import { ordersQuery, singleUserQuery, userOrdersQuery } from "@/utils/queries";
 import client from "@/utils/sanity";
 import { NextRequest, NextResponse } from "next/server";
+import { v4 as uuidv4 } from 'uuid';
 
 // FETCH ALL ORDERS
 export const GET = async (req: NextRequest) => {
@@ -42,18 +44,31 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       const orderedBy = await client.fetch(singleUserQuery, {
         email: body.userEmail
       })
-     
+      const {userEmail, ...dataToUpload} = body
+
       const doc = {
         _type: "order",
         orderedBy: {
           _ref: orderedBy._id,
           _type: "reference"
         },
-        price: body.price,
-        products: ["test", "test 2", "teeeeeeeeeest"], // here need to pass actual products
-        status: body.status
+        ...dataToUpload,
+        products: body.products.map((product: CartItemType) => (
+          {
+            _type: "orderItem",
+            _key: uuidv4(),
+            image: product.img?.src,
+            itemPrice: product.itemPrice,
+            optionTitle: product.optionTitle,
+            price: product.price,
+            quantity: product.quantity,
+            tax: product.tax,
+            taxPrice: product.taxPrice,
+            title: product.title
+          }
+        ))
       }
-      const order = await client.create(doc)
+     const order = await client.create(doc)
 
       return new NextResponse(JSON.stringify(order), { status: 201 });
     } catch (err) {

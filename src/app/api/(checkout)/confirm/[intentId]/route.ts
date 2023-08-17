@@ -15,7 +15,9 @@ export const PUT = async (request: NextRequest,
     await client
     .patch(order._id)
     .set({
-        status: "Being prepared!"
+        paymentStatus: "Paid",
+        status: "Being Prepared",
+        paidAt: "2023-08-17T14:15:00.000Z"
       })
     .commit();
     return new NextResponse(
