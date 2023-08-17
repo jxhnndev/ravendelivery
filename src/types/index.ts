@@ -83,11 +83,13 @@ export type CartType = {
 };
 
 export type CartItemType = {
-  id: string;
+  _key: string;
   title: string;
   img?: string;
   price: number;
   itemPrice: number;
+  tax: number;
+  taxPrice: number;
   optionTitle?: string;
   quantity: number;
   slug: string;
@@ -96,12 +98,20 @@ export type CartItemType = {
 export type OrderType = {
   _id: string;
   _createdAt: string;
-  orderedBy: UserType;
-  price: number;
- // products: CartItemType[];
-  products: string[];
-  status: string;
   intent_id?: String;
+  price: number;
+  itemsPrice: number;
+  tax: number;
+  taxPrice: number;
+  shippingPrice: number;
+  paymentMethod: string;
+  products: CartItemType[];
+  paymentStatus: string;
+  status: string;
+  orderedBy: UserType;
+  deliveredAt: string;
+  paidAt: string;
+ // products: string[];
 };
 
 export type ActionTypes = {

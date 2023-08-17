@@ -9,20 +9,17 @@ const discount = false // add this functionality later, discount status should c
 
 const OrderDetails = ({order}: IProps) => {
   return (
-    <>
-    test
-    {/*
     <div className="flex flex-col p-6 space-y-4 divide-y sm:p-10 divide-gray-700 dark:bg-gray-900 dark:text-gray-100">
         <h2 className="text-2xl font-semibold">Order Details</h2>
         <ul className="flex flex-col pt-4 space-y-2">
             {order?.products.map(item => (
                 <li key={item._key} className="flex items-start justify-between">
-                    <h3>{item.name}
+                    <h3>{item.title}
                         <span className="text-sm dark:text-gold text-chelsea"> x {item.quantity}</span>
                     </h3>
                     <div className="text-right">
-                        <span className="block">Total Price: $ {item.price * item.quantity}</span>
-                        <span className="block text-sm dark:text-gray-400">Item Price: $ {item.price}</span>
+                        <span className="block">Total Price: $ {item.taxPrice * item.quantity}</span>
+                        <span className="block text-sm dark:text-gray-400">Item Price: $ {item.itemPrice}</span>
                         <span className="block text-sm dark:text-gray-400">Item Tax: $ {item.tax}</span>
                     </div>
                 </li>
@@ -32,7 +29,7 @@ const OrderDetails = ({order}: IProps) => {
             <div>
                 <div className="flex justify-between">
                     <span>Total Items Price</span>
-                    <span>$ {order?.itemsPrice}</span>
+                    <span>$ {order?.price}</span>
                 </div>
                 {discount ?
                 <div className="flex items-center space-x-2 text-xs">
@@ -70,19 +67,17 @@ const OrderDetails = ({order}: IProps) => {
             <div className="space-y-6">
                 <div className="flex justify-between">
                     <span>Total</span>
-                    <span className="font-semibold">$ {order?.totalPrice}</span>
+                    <span className="font-semibold">$ {order?.price}</span>
                 </div>
                 <div className={`w-full py-2 font-semibold border rounded ${order?.paymentStatus === "Paid" ? "bg-green-500 border-green-500" : "bg-red-500 border-red-500"} text-gray-100  text-center`}>
                     Payment status: {order?.paymentStatus}
                 </div>
-                <div className={`w-full py-2 font-semibold border rounded ${order?.isDelivered ? "bg-blue-500 border-blue-500" : "bg-red-500 border-red-500"} text-gray-100 text-center`}>
-                    Status: {order?.isDelivered ? "Delivered" : "Pending"}
+                <div className={`w-full py-2 font-semibold border rounded ${order?.status === "delivered" ? "bg-blue-500 border-blue-500" : "bg-red-500 border-red-500"} text-gray-100 text-center`}>
+                    Status: {order?.status}
                 </div>
             </div>
         </div>
     </div>
-    * */}
-    </>
   )
 }
 
