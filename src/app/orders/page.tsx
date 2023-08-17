@@ -6,6 +6,7 @@ import { OrderType } from "@/types";
 import { FiEdit } from 'react-icons/fi'
 import { BASE_URL } from "@/utils";
 import { toast } from "react-toastify";
+import OrderList from "@/components/OrderList";
 
 const OrdersPage = () => {
   const { data: session, status } = useSession()
@@ -54,6 +55,7 @@ const OrdersPage = () => {
 
   return (
     <>
+    <OrderList data={data}/>
     {status === "authenticated" ?
     <div className="p-4 lg:px-20 xl:px-40 overflow-y-auto">
       {data ? 

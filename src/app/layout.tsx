@@ -7,6 +7,7 @@ import AuthProvider from '@/components/providers/AuthProvider'
 import QueryProvider from '@/components/providers/QueryProvider'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { ModalProvider } from '@/components/providers/ModalProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,13 +26,15 @@ export default function RootLayout({
       <body className={inter.className}>
         <AuthProvider>
           <QueryProvider>
-            <div>
-              <Banner />
-              <Navbar />
-              {children}
-              <Footer/>
-              <ToastContainer position="top-center" theme="dark" autoClose={2000} draggable/>
-            </div>
+            <ModalProvider>
+              <div>
+                <Banner />
+                <Navbar />
+                {children}
+                <Footer/>
+                <ToastContainer position="top-center" theme="dark" autoClose={2000} draggable/>
+              </div>
+            </ModalProvider>
           </QueryProvider>
         </AuthProvider>
       </body>

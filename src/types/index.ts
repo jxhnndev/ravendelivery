@@ -95,7 +95,7 @@ export type CartItemType = {
 
 export type OrderType = {
   _id: string;
-  _createdAt: Date;
+  _createdAt: string;
   orderedBy: UserType;
   price: number;
  // products: CartItemType[];
