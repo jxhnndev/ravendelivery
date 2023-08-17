@@ -149,20 +149,20 @@ const CartPage = () => {
                     <FaStripe className="h-14 w-full px-2 text-white cursor-pointer"/>
                   </Link>
                 </div>
-                <div className="flex items-center flex-wrap gap-2 justify-between">
+                <div className="flex text-xs sm:text-base items-center flex-wrap gap-2 justify-between">
                   <button
                     disabled={products.length > 0 ? false : true} 
-                    className={`block px-2 py-2 font-bold text-center uppercase duration-500 cursor-pointer text-white ${(products.length > 0) ? "bg-gold hover:bg-chelseaBlue" : "bg-gold/80 opacity-80 cursor-not-allowed"} rounded-md`}
-                    onClick={handleCheckout}
-                  >
-                    Checkout
-                  </button>
-                  <button
-                    disabled={products.length > 0 ? false : true} 
-                    className={`block px-2 py-2 font-bold text-center uppercase duration-500 cursor-pointer text-white ${(products.length > 0) ? "bg-red-500 hover:bg-chelseaBlue" : "bg-gold/80 opacity-80 cursor-not-allowed"} rounded-md`}
+                    className={`block w-full sm:w-auto px-2 py-2 font-bold text-center uppercase duration-500 cursor-pointer text-white ${(products.length > 0) ? "bg-red-500 hover:bg-chelseaBlue" : "bg-gold/80 opacity-80 cursor-not-allowed"} rounded-md`}
                     onClick={resetCart}
                   >
                     Clear Cart
+                  </button>
+                  <button
+                    disabled={products.length > 0 ? false : true} 
+                    className={`block w-full sm:w-auto px-2 py-2 font-bold text-center uppercase duration-500 cursor-pointer text-white ${(products.length > 0) ? "bg-gold hover:bg-chelseaBlue" : "bg-gold/80 opacity-80 cursor-not-allowed"} rounded-md`}
+                    onClick={handleCheckout}
+                  >
+                    Checkout
                   </button>
                 </div>
               </div>

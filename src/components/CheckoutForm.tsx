@@ -83,27 +83,62 @@ const CheckoutForm = () => {
   };
 
   return (
-    <form
-      id="payment-form"
-      onSubmit={handleSubmit}
-      className="min-h-[calc(100vh-6rem)] md:min-h-[calc(100vh-15rem)] p-4 lg:px-20 xl:px-40 flex flex-col gap-8"
-    >
-      <LinkAuthenticationElement id="link-authentication-element" />
-      <PaymentElement
-        id="payment-element"
-        options={{
-          layout: "tabs",
-        }}
-      />
-      <AddressForm />
-      <button disabled={isLoading || !stripe || !elements} id="submit" className="bg-red-500 text-white p-4 rounded-md w-28">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-        </span>
-      </button>
-      {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
-    </form>
+    <div className="max-w-6xl px-4 mx-auto my-4">
+      <div className="rounded-lg shadow bg-lightGold">
+        <form
+          id="payment-form"
+          onSubmit={handleSubmit}
+          className="p-6"
+        >
+              <div className="pb-6 border-b border-gold">
+                <h2 className="text-xl font-bold text-chelseaBlue md:text-3xl">
+                  Payment
+                </h2>
+              </div>
+              <div className="py-6 border-b border-gold">
+                <div className="w-full md:w-10/12">
+
+                  <div className="flex flex-wrap mb-2 -m-3">
+                    <div className="w-full p-3 md:w-1/3">
+                      <p className="text-sm font-semibold text-chelseaBlue">Payment information</p>
+                    </div>
+                    <div className="w-full p-3 md:flex-1">
+                      <LinkAuthenticationElement id="link-authentication-element"  className="w-full px-4 py-2.5 rounded-lg border border-gold mb-4"/>
+                      <p className="mb-1.5 font-medium text-base text-chelseaBlue">Card Details
+                      </p>
+                      <PaymentElement
+                        className="w-full px-4 py-2.5 rounded-lg border border-gold mt-4"
+                        id="payment-element"
+                        options={{
+                          layout: "tabs",
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <AddressForm />
+              <div className="w-full md:w-10/12">
+                <div className="flex flex-wrap justify-end -m-1.5">
+                  <div className="w-full md:w-auto p-1.5">
+                    <button
+                      disabled={isLoading || !stripe || !elements} 
+                      id="submit" 
+                      className="flex flex-wrap justify-center w-full px-4 py-2 text-sm font-medium text-white bg-chelseaBlue rounded-md hover:bg-gold duration-700 cursor-pointer"
+                    >
+                      <span id="button-text" className="cursor-pointer">
+                        {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              {/* Show any error or success messages */}
+              {message && <div id="payment-message">{message}</div>}
+        </form>
+      </div>
+    </div>
   );
 };
 
