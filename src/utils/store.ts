@@ -28,23 +28,32 @@ export const useCartStore = create(
       itemsPrice: INITIAL_STATE.itemsPrice,
       addToCart(item) {
         const products = get().products;
+        console.log("item", item)
+        console.log("products", products)
         const productInState = products.find(
           (product) => (product.id === item.id && product.optionTitle === item.optionTitle) // add this to add sizes separately or come up with diff solution && product.optionTitle === item.optionTitle
         );
+        console.log("productInState", productInState)
 
         if (productInState) {
           const updatedProducts = products.map((product) =>
-            product.id + product.optionTitle!.replace(/\s/g, '') === productInState.id + productInState.optionTitle!.replace(/\s/g, '') // BUG TO FIX, here we should add small to small, medium to medium, etc.
+            product.optionTitle === productInState.optionTitle && product.id === productInState.id
+       //     ? console.log(product.optionTitle === productInState.optionTitle && product.id === productInState.id, product.optionTitle, productInState.optionTitle)
+      //      : console.log(product.optionTitle === productInState.optionTitle && product.id === productInState.id, product.optionTitle, productInState.optionTitle)
+        //    product.id + product.optionTitle!.replace(/\s/g, '') === productInState.id + productInState.optionTitle!.replace(/\s/g, '') // BUG TO FIX, here we should add small to small, medium to medium, etc.
+              
               ? {
                   ...item,
                   quantity: item.quantity + product.quantity,
                   totalItemPrice: item.totalItemPrice + product.totalItemPrice,
                   itemPrice: item.itemPrice + product.itemPrice,
-                  tax: 1.2,
                   taxPrice: item.taxPrice + product.taxPrice,
                 }
-              : item
+              : product
+              
           );
+          console.log("updated products", updatedProducts)
+        
           set((state) => ({
             products: updatedProducts,
             totalItems: state.totalItems + item.quantity,
@@ -55,6 +64,7 @@ export const useCartStore = create(
             shippingPrice: state.shippingPrice, // to figure out how to calculate this
           }));
         } else {
+          {/*
           set((state) => ({
             products: [...state.products, item],
             totalItems: state.totalItems + item.quantity,
@@ -64,6 +74,7 @@ export const useCartStore = create(
             itemsPrice: state.itemsPrice + item.itemPrice,
             shippingPrice: state.shippingPrice, // to figure out how to calculate this
           }));
+          * */}
         }
       },
       removeFromCart(item) {
