@@ -60,7 +60,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
             image: product.img?.src,
             itemPrice: product.itemPrice,
             optionTitle: product.optionTitle,
-            price: product.price,
+            price: product.totalItemPrice,
             quantity: product.quantity,
             tax: product.tax,
             taxPrice: product.taxPrice,

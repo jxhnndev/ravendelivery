@@ -24,7 +24,7 @@ const Price = ({ product }: { product: Product }) => {
   useEffect(() => {
     if (product.priceOptions?.length) {
       setTotal(
-        quantity * product.mainPrice + product.priceOptions[selected].additionalPrice
+        quantity * (product.taxPrice + product.priceOptions[selected].additionalPrice)
       );
     }
   }, [quantity, selected, product])
@@ -36,13 +36,13 @@ const Price = ({ product }: { product: Product }) => {
      // test: product._id + product.name.replace(/\s/g, ''),
       img: imageProps,
       itemPrice: product.mainPrice,
-      price: total,
+      totalItemPrice: total,
       quantity: quantity,
       ...(product.priceOptions?.length && {
         optionTitle: product.priceOptions[selected].title,
       }),
-      tax: 1,
-      taxPrice: 1,
+      taxPrice: product.taxPrice, 
+      tax: product.tax, 
       slug: product.slug.current,
     })
     toast.success("The product added to the cart!")
@@ -57,7 +57,7 @@ const Price = ({ product }: { product: Product }) => {
             <span className={`rounded-lg border border-gold px-6 py-2 font-bold capitalize ${selected === index ? "bg-gold text-white" : "bg-white text-gold"}`}>
               {option.title}
             </span>
-            <span className="mt-2 block text-center text-xs">+ ${option.additionalPrice}</span>
+            <span className="mt-2 block text-center text-xs">+ ${option.additionalPrice} (incl. tax)</span>
           </button>
           ))}
         </div>
@@ -82,7 +82,7 @@ const Price = ({ product }: { product: Product }) => {
         <div className="mt-10 flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
           <div className="flex items-end text-chelseaBlue">
             <h1 className="text-2xl font-bold">$ {total.toFixed(2)}</h1>
-            <span className="text-base pl-1">Total</span>
+            <span className="text-base pl-1">Total (incl. tax)</span>
           </div>
           <button 
             type="button"

@@ -9,7 +9,7 @@ import { useEffect } from "react"
 import { FaStripe } from 'react-icons/fa'
 
 const CartPage = () => {
-  const { products, totalItems, totalPrice, removeFromCart, resetCart } = useCartStore();
+  const { products, totalItems, totalPrice, shippingPrice, tax, taxPrice, itemsPrice, removeFromCart, resetCart } = useCartStore();
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -26,16 +26,16 @@ const CartPage = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            price: totalPrice,
+            userEmail: session.user.email,
+            itemsPrice: itemsPrice,
             products,
+            shippingPrice: shippingPrice,
+            tax: tax,
+            taxPrice: taxPrice,
+            price: totalPrice,
             paymentMethod: "card",
             paymentStatus: "Not Paid",
-            shippingPrice: 0,
             status: "Pending",
-            tax: 3,
-            taxPrice: 15,
-            itemsPrice: 14,
-            userEmail: session.user.email,
           }),
         });
         const data = await res.json()
@@ -100,7 +100,7 @@ const CartPage = () => {
                     </div>
                   </div>
                   <div className="hidden px-4 lg:block lg:w-2/12">
-                    <p className="text-lg font-bold text-yellow-500">${item.itemPrice.toFixed(2)}</p>
+                    <p className="text-lg font-bold text-yellow-500">${item.taxPrice.toFixed(2)}</p>
                   </div>
                   
                   <div className="w-auto px-4 md:w-1/6 lg:w-2/12 flex items-center text-xs md:text-lg">
@@ -112,7 +112,7 @@ const CartPage = () => {
                   
                   <div className="w-auto px-4 text-right md:w-1/6 lg:w-2/12 text-xs md:text-lg">
                     <span className="md:hidden mr-1">Subtotal:</span>
-                    <p className="font-bold text-yellow-500 dark:text-gray-400">${item.price.toFixed(2)}</p>
+                    <p className="font-bold text-yellow-500 dark:text-gray-400">${item.totalItemPrice.toFixed(2)}</p>
                   </div>
                 </div>
                 ))}
@@ -139,11 +139,13 @@ const CartPage = () => {
                 <h2 className="mb-8 text-base sm:text-3xl font-bold text-gray-700 dark:text-gray-400">Order Summary</h2>
                 <div className="flex items-center flex-wrap justify-between pb-4 mb-4 border-b border-gray-300 dark:border-gray-700 ">
                   <span className="text-gray-700 dark:text-gray-400">Subtotal: {totalItems} items</span>
-                  <span className="text-xl font-bold text-gray-700 dark:text-gray-400 ">${totalPrice.toFixed(2)}</span>
+                  <span className="text-xl font-bold text-gray-700 dark:text-gray-400 ">${taxPrice.toFixed(2)}</span>
                 </div>
                 <div className="flex items-center flex-wrap justify-between pb-4 mb-4 ">
                   <span className="text-gray-700 dark:text-gray-400 ">Shipping</span>
-                  <span className="text-xl font-bold text-gray-700 dark:text-gray-400 ">Free</span>
+                  <span className="text-xl font-bold text-gray-700 dark:text-gray-400 ">
+                    {shippingPrice === 0 ? "Free" : `$ ${shippingPrice}`}
+                  </span>
                 </div>
                 <div className="flex items-center flex-wrap justify-between pb-4 mb-4 ">
                   <span className="text-gray-700 dark:text-gray-400">Order Total</span>

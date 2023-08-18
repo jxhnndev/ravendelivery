@@ -1,3 +1,7 @@
+// TO DO
+// review the calculations
+
+
 import { ActionTypes, CartType } from "@/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
@@ -6,14 +10,22 @@ const INITIAL_STATE = {
   products: [],
   totalItems: 0,
   totalPrice: 0,
+  tax: 0,
+  taxPrice: 0,
+  shippingPrice: 0,
+  itemsPrice: 0,
 };
-
+// TO DO eventually this needs to be validated with BE actual prices, if user messes up with values in console then error will be thrown
 export const useCartStore = create(
   persist<CartType & ActionTypes>(
     (set, get) => ({
       products: INITIAL_STATE.products,
       totalItems: INITIAL_STATE.totalItems,
       totalPrice: INITIAL_STATE.totalPrice,
+      tax: INITIAL_STATE.tax,
+      taxPrice: INITIAL_STATE.taxPrice,
+      shippingPrice: INITIAL_STATE.shippingPrice,
+      itemsPrice: INITIAL_STATE.itemsPrice,
       addToCart(item) {
         const products = get().products;
         const productInState = products.find(
@@ -26,23 +38,31 @@ export const useCartStore = create(
               ? {
                   ...item,
                   quantity: item.quantity + product.quantity,
-                  price: item.price + product.price,
-                //  itemPrice: item.itemPrice + product.itemPrice,
-                //  tax: item.tax + product.tax,
-                //  taxPrice: item.taxPrice + product.taxPrice,
+                  totalItemPrice: item.totalItemPrice + product.totalItemPrice,
+                  itemPrice: item.itemPrice + product.itemPrice,
+                  tax: 1.2,
+                  taxPrice: item.taxPrice + product.taxPrice,
                 }
               : item
           );
           set((state) => ({
             products: updatedProducts,
             totalItems: state.totalItems + item.quantity,
-            totalPrice: state.totalPrice + item.price,
+            totalPrice: state.totalPrice + item.totalItemPrice,
+            tax: 1.2,
+            taxPrice: state.taxPrice + item.taxPrice,
+            itemsPrice: state.itemsPrice + item.itemPrice,
+            shippingPrice: state.shippingPrice, // to figure out how to calculate this
           }));
         } else {
           set((state) => ({
             products: [...state.products, item],
             totalItems: state.totalItems + item.quantity,
-            totalPrice: state.totalPrice + item.price,
+            totalPrice: state.totalPrice + item.totalItemPrice,
+            tax: 1.2,
+            taxPrice: state.taxPrice + item.taxPrice,
+            itemsPrice: state.itemsPrice + item.itemPrice,
+            shippingPrice: state.shippingPrice, // to figure out how to calculate this
           }));
         }
       },
@@ -50,7 +70,11 @@ export const useCartStore = create(
         set((state) => ({
           products: state.products.filter((product) => (product.id! + product.optionTitle!.replace(/\s/g, '') !== item.id! + item.optionTitle!.replace(/\s/g, '') ) ),
           totalItems: state.totalItems - item.quantity,
-          totalPrice: state.totalPrice - item.price,
+          totalPrice: state.totalPrice - item.totalItemPrice,
+          tax: 1.2, // this needs change
+          taxPrice: state.taxPrice - item.taxPrice,
+          itemsPrice: state.itemsPrice - item.itemPrice,
+          shippingPrice: state.shippingPrice, // to figure out how to calculate this
         }));
       },
       resetCart() {
@@ -58,6 +82,10 @@ export const useCartStore = create(
           products: [],
           totalItems: 0,
           totalPrice: 0,
+          tax: 0,
+          taxPrice: 0,
+          shippingPrice: 0,
+          itemsPrice: 0,
         }));
       }
     }),

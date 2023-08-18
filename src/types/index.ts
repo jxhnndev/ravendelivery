@@ -35,6 +35,8 @@ export type Product = {
   slug: {current: string};
   image: ImageType
   mainPrice: number;
+  tax: number;
+  taxPrice: number;
   priceOptions?: { title: string; additionalPrice: number }[];
   featured: boolean;
   details: string;
@@ -80,6 +82,10 @@ export type CartType = {
   products: CartItemType[];
   totalItems: number;
   totalPrice: number;
+  tax: number;
+  taxPrice: number;
+  shippingPrice: number;
+  itemsPrice: number;
 };
 
 export type CartItemType = {
@@ -87,7 +93,8 @@ export type CartItemType = {
   _key?: string;
   title: string;
   img?: { src: string};
-  price: number;
+  price?: number;
+  totalItemPrice: number; // itemPrice + tax + additionalPrice
   itemPrice: number;
   tax: number;
   taxPrice: number;

@@ -23,11 +23,11 @@ const ProductCard2 = ({item}: Props) => {
           title: item.name,
           img: imageProps,
           itemPrice: item.mainPrice,
-          price: item.mainPrice,
+          totalItemPrice: item.taxPrice,
           quantity: 1,
           optionTitle: "small",
-          tax: 1,
-          taxPrice: 1,
+          taxPrice: item.taxPrice, 
+          tax: item.tax, 
           slug: item.slug.current,
         })
         toast.success("The product added to the cart!")
@@ -52,7 +52,7 @@ const ProductCard2 = ({item}: Props) => {
           {/* TEXT CONTAINER */}
           <div className="flex flex-wrap items-center justify-between font-bold">
             <h1 className="text-base md:text-2xl uppercase p-2">{item.name}</h1>
-            <h2 className="group-hover:hidden text-lg md:text-xl">${item.mainPrice?.toFixed(2)}</h2>
+            <h2 className="group-hover:hidden text-lg md:text-xl">${item.taxPrice?.toFixed(2)}</h2>
             <button
                 onClick={handleCart}
                 className="hidden group-hover:block uppercase bg-gold text-white p-2 rounded-md cursor-pointer">
