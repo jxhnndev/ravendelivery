@@ -35,13 +35,13 @@ const Price = ({ product }: { product: Product }) => {
       title: product.name,
      // test: product._id + product.name.replace(/\s/g, ''),
       img: imageProps,
-      itemPrice: product.mainPrice,
+      itemPrice: (product.mainPrice + (product.priceOptions![selected].additionalPrice / product.tax)) * quantity,
       totalItemPrice: total,
       quantity: quantity,
       ...(product.priceOptions?.length && {
         optionTitle: product.priceOptions[selected].title,
       }),
-      taxPrice: product.taxPrice, 
+      taxPrice: (product.taxPrice + product.priceOptions![selected].additionalPrice), 
       tax: product.tax, 
       slug: product.slug.current,
     })

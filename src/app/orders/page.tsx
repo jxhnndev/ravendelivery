@@ -58,7 +58,11 @@ const OrdersPage = () => {
     {status === "authenticated" ?
     <div className="p-4 lg:px-20 xl:px-40 overflow-y-auto">
       {data ? 
+      <>
+      {data.length > 0 ?
       <OrderList data={data} isAdmin={session?.user.isAdmin} handleUpdate={handleUpdate}/>
+      : <div>No orders</div>}
+      </>
       : "Something went wrong"}
     </div>
     : <div>Unauthenticated, redirecting to login...</div>}

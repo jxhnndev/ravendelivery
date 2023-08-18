@@ -82,7 +82,7 @@ const OrderList = ({data, isAdmin, handleUpdate}: IProps) => {
                             </time>
                         </td>
                         <td className="p-3 text-right">
-                            <p>$ {item.price}</p>
+                            <p>$ {item.price.toFixed(2)}</p>
                         </td>
                         {isAdmin ? (
                             <td>

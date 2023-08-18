@@ -139,7 +139,7 @@ const CartPage = () => {
                 <h2 className="mb-8 text-base sm:text-3xl font-bold text-gray-700 dark:text-gray-400">Order Summary</h2>
                 <div className="flex items-center flex-wrap justify-between pb-4 mb-4 border-b border-gray-300 dark:border-gray-700 ">
                   <span className="text-gray-700 dark:text-gray-400">Subtotal: {totalItems} items</span>
-                  <span className="text-xl font-bold text-gray-700 dark:text-gray-400 ">${taxPrice.toFixed(2)}</span>
+                  <span className="text-xl font-bold text-gray-700 dark:text-gray-400 ">${totalPrice.toFixed(2)}</span>
                 </div>
                 <div className="flex items-center flex-wrap justify-between pb-4 mb-4 ">
                   <span className="text-gray-700 dark:text-gray-400 ">Shipping</span>
@@ -149,7 +149,7 @@ const CartPage = () => {
                 </div>
                 <div className="flex items-center flex-wrap justify-between pb-4 mb-4 ">
                   <span className="text-gray-700 dark:text-gray-400">Order Total</span>
-                  <span className="text-xl font-bold text-gray-700 dark:text-gray-400">${totalPrice.toFixed(2)}</span>
+                  <span className="text-xl font-bold text-gray-700 dark:text-gray-400">${(totalPrice + shippingPrice).toFixed(2)}</span>
                 </div>
                 <h2 className="text-xs sm:text-sm text-chelseaBlue mb-2">Payments powered by:</h2>
                 <div className="flex items-center mb-4 ">

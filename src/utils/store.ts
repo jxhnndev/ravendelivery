@@ -59,22 +59,22 @@ export const useCartStore = create(
             totalItems: state.totalItems + item.quantity,
             totalPrice: state.totalPrice + item.totalItemPrice,
             tax: 1.2,
-            taxPrice: state.taxPrice + item.taxPrice,
+            taxPrice: state.taxPrice + Number((item.taxPrice * item.quantity).toFixed(2)),
             itemsPrice: state.itemsPrice + item.itemPrice,
             shippingPrice: state.shippingPrice, // to figure out how to calculate this
           }));
         } else {
-          {/*
+          
           set((state) => ({
             products: [...state.products, item],
             totalItems: state.totalItems + item.quantity,
             totalPrice: state.totalPrice + item.totalItemPrice,
             tax: 1.2,
-            taxPrice: state.taxPrice + item.taxPrice,
+            taxPrice: state.taxPrice + Number((item.taxPrice * item.quantity).toFixed(2)),
             itemsPrice: state.itemsPrice + item.itemPrice,
             shippingPrice: state.shippingPrice, // to figure out how to calculate this
           }));
-          * */}
+          
         }
       },
       removeFromCart(item) {
@@ -83,7 +83,7 @@ export const useCartStore = create(
           totalItems: state.totalItems - item.quantity,
           totalPrice: state.totalPrice - item.totalItemPrice,
           tax: 1.2, // this needs change
-          taxPrice: state.taxPrice - item.taxPrice,
+          taxPrice: state.taxPrice - Number((item.taxPrice * item.quantity).toFixed(2)),
           itemsPrice: state.itemsPrice - item.itemPrice,
           shippingPrice: state.shippingPrice, // to figure out how to calculate this
         }));

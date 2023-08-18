@@ -18,9 +18,9 @@ const OrderDetails = ({order}: IProps) => {
                         <span className="text-sm dark:text-gold text-chelsea"> x {item.quantity}</span>
                     </h3>
                     <div className="text-right">
-                        <span className="block">Total Price: $ {item.taxPrice.toFixed(2)}</span>
+                        <span className="block">Total Price: $ {item.price!.toFixed(2)}</span>
                         <span className="block text-sm dark:text-gray-400">Item Price: $ {item.itemPrice.toFixed(2)}</span>
-                        <span className="block text-sm dark:text-gray-400">Item Tax: $ {(item.taxPrice - item.itemPrice).toFixed(2)}</span>
+                        <span className="block text-sm dark:text-gray-400">Item Tax: $ {(item.price! - item.itemPrice).toFixed(2)}</span>
                     </div>
                 </li>
             ))}
@@ -55,7 +55,7 @@ const OrderDetails = ({order}: IProps) => {
             </div>
             <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>$ {order?.taxPrice.toFixed(2)}</span>
+                <span>$ {order?.price.toFixed(2)}</span>
             </div>
             <div className="flex flex-col">
                 <div className="flex justify-between">
