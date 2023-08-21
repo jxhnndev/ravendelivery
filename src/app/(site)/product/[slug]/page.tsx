@@ -2,7 +2,7 @@ import { BreadCrumb, Price, Tabs } from '@/components'
 import { Product } from '@/types';
 import { BsStarFill, BsCreditCard2Front } from 'react-icons/bs'
 import { getClient } from '@/utils/sanity';
-import { singleProductQuery } from '@/utils/queries';
+import { reviewsQuery, singleProductQuery } from '@/utils/queries';
 import { GiDeliveryDrone } from 'react-icons/gi'
 import ImageGallery from '@/components/ImageGallery';
 import DeleteButton from '@/components/DeleteButton';
@@ -15,6 +15,9 @@ const links = [
 const ProductPage = async ({ params }: { params: { slug: string } }) => {
   const product: Product = await getClient().fetch(singleProductQuery, {
     slug: params.slug
+  })
+  const reviews: any = await getClient().fetch(reviewsQuery, {
+    productId: product._id
   })
   return (
     <section className="py-12 sm:py-16"> 
@@ -56,7 +59,7 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
 
           </div>
           {/**TABS */}
-          <Tabs data={product}/>
+          <Tabs product={product} reviews={reviews}/>
           {/**TABS END*/}
         </div>
         : ""}

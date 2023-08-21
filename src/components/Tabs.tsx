@@ -4,10 +4,11 @@ import { useState } from "react"
 import ReviewContainer from "./reviews/ReviewContainer"
 
 type Props = {
-    data: Product
+    product: Product
+    reviews: any
   }
 
-const Tabs = ({ data }: Props) => {
+const Tabs = ({ product, reviews }: Props) => {
     const [selected, setSelected] = useState(1);
   return (
     <div className="lg:col-span-3 mb-5">
@@ -22,14 +23,14 @@ const Tabs = ({ data }: Props) => {
         </div>
 
         <div className={`${selected === 1 ? "" : "hidden"} mt-8 flow-root sm:mt-12`}>
-        <h1 className="text-3xl font-bold">{data.name}</h1>
-        <p className="mt-4">{data.details}</p>
+        <h1 className="text-3xl font-bold">{product.name}</h1>
+        <p className="mt-4">{product.details}</p>
         </div>
 
         <div className={`${selected === 2 ? "" : "hidden"} mt-8 flow-root sm:mt-12`}>
           <h1 className="text-3xl font-bold">Reviews</h1>
-          <p>this form is FE only, functionality of the form and comments is under construction</p>
-          <ReviewContainer/>
+          <p>functionality of the form and comments is under construction</p>
+          <ReviewContainer reviews={reviews}/>
         </div>
     </div>
   )

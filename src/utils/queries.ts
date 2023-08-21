@@ -25,6 +25,17 @@ export const singleProductQuery = groq`
 }
 `;
 
+export const reviewsQuery = groq`
+*[_type == "review" && !(_id in path('drafts.**')) && product._ref == $productId && approved == true] {
+  _id, 
+  name, 
+  email, 
+  rating, 
+  comment,
+  _createdAt
+}
+`;
+
 export const sliderQuery = groq`
 *[_type == "sliderContent" && !(_id in path('drafts.**'))] | order(_createdAt desc) {
   ...,

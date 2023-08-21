@@ -28,7 +28,7 @@ const CommentForm = () => {
             </div>
             <div className="flex flex-col w-full">
                 <textarea rows={3} placeholder="Message..." className="p-4 rounded-md resize-none text-gray-100 bg-chelseaBlue border border-gold"></textarea>
-                <button type="button" className="py-2 my-8 font-semibold rounded-md text-gray-900 bg-gold hover:bg-lightGold cursor-pointer duration-700 hover:scale-110">Leave feedback</button>
+                <button onClick={() => alert("under construction")} type="button" className="py-2 my-8 font-semibold rounded-md text-gray-900 bg-gold hover:bg-lightGold cursor-pointer duration-700 hover:scale-110">Leave feedback</button>
             </div>
         </div>
     </div>
