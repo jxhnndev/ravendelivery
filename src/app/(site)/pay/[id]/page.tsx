@@ -43,6 +43,10 @@ const PaymentPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <div>
+      <div className="flex mx-2">
+      use card <span className="ml-1 font-bold">4242 4242 4242 4242</span>, Use a valid future date, such as 12/34. Use any three-digit CVC, Use any value you like for other form fields.
+      <span className="text-red-500 font-bold">DO NOT ENTER REAL CARD DATA</span>
+      </div>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />

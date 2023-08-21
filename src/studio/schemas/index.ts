@@ -7,6 +7,7 @@ import order from "./order";
 import orderItem from "./orderItem";
 import priceOption from "./priceOption";
 import product from "./product";
+import review from "./review";
 import account from "./sanityAuth/account";
 import user from "./sanityAuth/user";
 import verificationToken from "./sanityAuth/verification-token";
@@ -16,6 +17,7 @@ import specialOffer from "./specialOffer";
 
 const schemas = [
     product,
+    review,
     orderItem,
     order,
     sliderContent,
