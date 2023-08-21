@@ -1,6 +1,7 @@
 "use client"
 import { Product } from "@/types"
 import { useState } from "react"
+import ReviewContainer from "./reviews/ReviewContainer"
 
 type Props = {
     data: Product
@@ -15,7 +16,7 @@ const Tabs = ({ data }: Props) => {
             <button onClick={() => setSelected(1)} className={`border-b-2 ${selected === 1 ? "border-gray-900 hover:border-gray-400 text-gray-900 hover:text-gray-800" : "border-transparent text-gray-600"} py-4 text-sm font-medium`}> Description </button>
             <button onClick={() => setSelected(2)} className={`inline-flex items-center border-b-2 ${selected === 2 ? "border-gray-900 hover:border-gray-400 text-gray-900 hover:text-gray-800" : "border-transparent text-gray-600"} py-4 text-sm font-medium `}>
             Reviews
-            <span className="ml-2 block rounded-full bg-gray-500 px-2 py-px text-xs font-bold text-gray-100"> 1,209 </span>
+            <span className="ml-2 block rounded-full bg-gold px-2 py-px text-xs font-bold text-gray-100"> 1,209 </span>
             </button>
         </nav>
         </div>
@@ -26,8 +27,9 @@ const Tabs = ({ data }: Props) => {
         </div>
 
         <div className={`${selected === 2 ? "" : "hidden"} mt-8 flow-root sm:mt-12`}>
-        <h1 className="text-3xl font-bold">Reviews</h1>
-        <p className="mt-4">Review component will be here, work in progress...</p>
+          <h1 className="text-3xl font-bold">Reviews</h1>
+          <p>this form is FE only, functionality of the form and comments is under construction</p>
+          <ReviewContainer/>
         </div>
     </div>
   )
