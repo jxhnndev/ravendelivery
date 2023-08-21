@@ -36,5 +36,5 @@ yarn-error.log*
 next-env.d.ts
 
 #testpages
-/src/app/test
-/src/app/add
+/src/app/(site)/test
+/src/app/(site)/add
