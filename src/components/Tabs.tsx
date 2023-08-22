@@ -66,7 +66,7 @@ const Tabs = ({ product, reviews }: Props) => {
           <p>functionality of the form and comments is under construction</p>
           <ReviewContainer comments={comments}>
             {/** leave comments */}
-            <CommentForm/>
+            <CommentForm id={product._id}/>
             {/** reviews rating */}
             {reviews.length > 0 ?
             <Ratings data={reviews}/>
