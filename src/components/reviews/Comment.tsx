@@ -1,5 +1,6 @@
 import React from 'react'
-import { BsStar } from 'react-icons/bs'
+import { BsStarFill } from 'react-icons/bs'
+import { parseISO, format } from "date-fns";
 
 type Props = {
     comment: string,
@@ -21,11 +22,20 @@ const Comment = ({comment, name, date, rating}: Props) => {
         
                 <div>
                     <h4 className="font-bold max-sm:text-sm">{name}</h4>
-                    <span className="text-xs text-lightGold">{date}2 days ago</span>
+                    <span className='text-xs text-lightGold mr-1'>on</span>
+                    <time
+                        className="text-xs text-lightGold"
+                        dateTime={date}
+                    >
+                        {format(
+                            parseISO(date),
+                            "MMMM dd, yyyy"
+                        )}
+                    </time>
                 </div>
             </div>
-            <div className="flex items-center space-x-2 text-yellow-500">
-                <BsStar className="w-5 h-5 fill-current"/>
+            <div className={`flex items-center space-x-2 ${rating < 3 ? "text-red-500" : rating > 3 ? "text-yellow-500" : "text-lightGold"}`}>
+                <BsStarFill className="w-5 h-5 fill-current"/>
                 <span className="text-base sm:text-xl font-bold">{rating}</span>
             </div>
         </div>
