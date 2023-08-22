@@ -69,7 +69,7 @@ const Tabs = ({ product, reviews }: Props) => {
             <CommentForm/>
             {/** reviews rating */}
             {reviews.length > 0 ?
-            <Ratings/>
+            <Ratings data={reviews}/>
             : <></>}
           </ReviewContainer>
         </div>
