@@ -1,5 +1,6 @@
 import { BASE_URL } from '@/utils'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 import { useState } from 'react'
 import { BsStarFill } from 'react-icons/bs'
 
@@ -13,6 +14,9 @@ const CommentForm = ({id}: Props) => {
     const [isPostingComment, setIsPostingComment] = useState<boolean>(false)
 
     const { data: session, status } = useSession();
+
+    const alreadyReviewed = false
+    const notPurchased = false
 
     const addComment = async (e: { preventDefault: () => void }) => {
         e.preventDefault(); // to block reloading page after comment is posted
@@ -53,6 +57,19 @@ const CommentForm = ({id}: Props) => {
   return (
     <div className="flex flex-col max-w-xl p-8 shadow-sm rounded-xl lg:p-12 bg-chelseaBlue text-gray-100">
         <div className="flex flex-col items-center w-full">
+            {status === "unauthenticated" || !session
+            ?
+            <h2 className="text-xl font-semibold text-center">Please <Link href={'/login'} className='text-gold hover:text-lightGold duration-700 cursor-pointer'>Sign in</Link> to review this product.</h2>
+            :
+            alreadyReviewed 
+            ? 
+            <h2 className="text-xl font-semibold text-center">You have already reviewed this product.</h2>
+            :
+            notPurchased
+            ?
+            <h2 className="text-xl font-semibold text-center">You need to purchase the product first to be able to review it.</h2>
+            :
+            <>
             <h2 className="text-3xl font-semibold text-center">Your opinion matters!</h2>
             <div className="flex flex-col items-center py-6 space-y-3">
                 <span className="text-center">How did you like this product?</span>
@@ -91,6 +108,8 @@ const CommentForm = ({id}: Props) => {
                     {isPostingComment ? 'Posting review...' : 'Leave feedback'}
                 </button>
             </div>
+            </>
+            }
         </div>
     </div>
   )
