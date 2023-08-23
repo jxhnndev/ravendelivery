@@ -1,26 +1,24 @@
-import { userReviewsQuery } from "./queries";
-import client from "./sanity";
+import { useQuery } from "@tanstack/react-query";
+import { BASE_URL } from ".";
 
-const getOrders = async (email: string) => {
-    const orders = await client.fetch(userReviewsQuery, {
-        email: email
-    })
-
-    return orders
-}
-
-export const useReviewCheck = (email: string) => {
-   // const orders = getOrders(email) this won't work on client, add different solution here to fetch review data
+export const useReviewCheck = (id: string) => {
+    // const orders = getOrders(email) this won't work on client, add different solution here to fetch review data
     
-    if (email === "test") {
+    const { isLoading, error, data } = useQuery({
+        queryKey: ["reviews"],
+        queryFn: () =>
+          fetch(`${BASE_URL}/api/products/reviews`).then((res) => res.json()),
+      });
+    const userReviewsOnProduct = data?.filter((item: any) => item.product._ref === id).length
+    if (userReviewsOnProduct >= 1) {
         return true
     } else {
         return false
     }
   };
 
-export const usePurchaseCheck = (email: string) => {
-    if (email === "test") {
+export const usePurchaseCheck = (id: string) => {
+    if (id === "test") {
         return true
     } else {
         return false

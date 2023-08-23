@@ -2,6 +2,7 @@ import { BASE_URL } from '@/utils'
 import { usePurchaseCheck, useReviewCheck } from '@/utils/reviewEligibilityCheck'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { BsStarFill } from 'react-icons/bs'
 
@@ -13,11 +14,19 @@ const CommentForm = ({id}: Props) => {
     const [comment, setComment] = useState<string>('')
     const [rating, setRating] = useState<number>(5)
     const [isPostingComment, setIsPostingComment] = useState<boolean>(false)
+    const [submitted, setSubmitted] = useState<boolean>(false)
 
     const { data: session, status } = useSession();
 
-    const alreadyReviewed = useReviewCheck(session?.user.email!)
-    const notPurchased = usePurchaseCheck(session?.user.email!)
+    //remporary function to reload reviews, todo - implement dynamic refreshing from db as soon as comment is posted
+    const router = useRouter()
+    const handleRefresh = () => {
+        router.refresh();
+        setSubmitted(false)
+      };
+
+    const alreadyReviewed = useReviewCheck(id) // add in usestate to fetch fresh data?
+    const notPurchased = usePurchaseCheck(id)
 
     const addComment = async (e: { preventDefault: () => void }) => {
         e.preventDefault(); // to block reloading page after comment is posted
@@ -48,6 +57,8 @@ const CommentForm = ({id}: Props) => {
                   setComment(''); // clear input field
                   setIsPostingComment(false);
                 const resData = await res.json()
+                resData ? setSubmitted(true) : setSubmitted(false)
+                router.refresh
             } catch (err) {
                 console.log(err)
             }
@@ -72,6 +83,20 @@ const CommentForm = ({id}: Props) => {
             :
             <>
             <h2 className="text-3xl font-semibold text-center">Your opinion matters!</h2>
+            {submitted ? 
+            <div className="flex flex-col items-center py-6 space-y-3">
+                <span className="text-center">Thanks for the feedback.</span>
+                <button 
+                    onClick={handleRefresh}
+                    type="button" 
+                    className={`py-2 px-2 my-8 font-semibold rounded-md text-gray-900 bg-gold hover:bg-lightGold cursor-pointer duration-700 hover:scale-110`}
+                >
+                    Refresh reviews
+                </button>
+
+            </div> 
+            :
+            <>
             <div className="flex flex-col items-center py-6 space-y-3">
                 <span className="text-center">How did you like this product?</span>
                 <div className="flex">
@@ -109,6 +134,8 @@ const CommentForm = ({id}: Props) => {
                     {isPostingComment ? 'Posting review...' : 'Leave feedback'}
                 </button>
             </div>
+            </>
+            }
             </>
             }
         </div>
