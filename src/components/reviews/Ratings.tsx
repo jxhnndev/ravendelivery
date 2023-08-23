@@ -1,14 +1,10 @@
+import { Rating } from '@/types'
 import React from 'react'
 import { BsStarFill } from 'react-icons/bs'
+import RatingLine from './RatingLine'
 
 type Props = {
     data: any
-  }
-
-type Rating = {
-    id: number,
-    title: string,
-    percentage: number
   }
 
 const Ratings = ({data}: Props) => {
@@ -17,12 +13,6 @@ const Ratings = ({data}: Props) => {
         const percentage = (ratingCount / data.length) * 100
 
         return percentage
-    }
-
-    const calculateWidth = (percentage: number) => {
-        const classNameValue = `bg-gold h-4 w-[${percentage.toString()}%]`
-
-        return classNameValue
     }
 
     const calculateAverage = () => {
@@ -92,15 +82,8 @@ const Ratings = ({data}: Props) => {
             </div>
             <p className="text-sm text-gray-400">{data.length === 1 ? `${data.length} rating` : `${data.length} ratings`}</p>
             <div className="flex flex-col mt-4">
-
                 {ratings.map((item: Rating) => (
-                <div key={item.id} className="flex items-center space-x-1">
-                    <span className="flex-shrink-0 w-16 text-sm justify-center text-center">{item.title}</span>
-                    <div className="flex-1 h-4 overflow-hidden rounded-sm bg-gray-700">
-                        <div className={calculateWidth(Number(item.percentage.toFixed(0)))}></div>
-                    </div>
-                    <span className="flex-shrink-0 w-12 text-xs sm:text-sm text-right">{item.percentage.toFixed(2)}%</span>
-                </div>
+                    <RatingLine key={item.id} item={item}/>
                 ))}
             </div>
         </div>

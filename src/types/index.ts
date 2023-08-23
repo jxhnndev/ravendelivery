@@ -127,3 +127,9 @@ export type ActionTypes = {
   removeFromCart:(item:CartItemType)=> void;
   resetCart:()=>void;
 }
+
+export type Rating = {
+  id: number,
+  title: string,
+  percentage: number
+}
