@@ -8,10 +8,8 @@ type Props = {
   }
 
 const CommentForm = ({id}: Props) => {
-    const [comment, setComment] = useState<string>('test api')
-    const [rating, setRating] = useState<number>()
-    const [email, setEmail] = useState<string>('')
-    const [userName, setUserName] = useState<string>('')
+    const [comment, setComment] = useState<string>('')
+    const [rating, setRating] = useState<number>(5)
     const [isPostingComment, setIsPostingComment] = useState<boolean>(false)
 
     const { data: session, status } = useSession();
@@ -19,10 +17,10 @@ const CommentForm = ({id}: Props) => {
     const addComment = async (e: { preventDefault: () => void }) => {
         e.preventDefault(); // to block reloading page after comment is posted
 
-        const data = {
-            name: "test",
-            email: "test@test.com",
-            rating: 2,
+        const review = {
+            name: session?.user.name,
+            email: session?.user.email,
+            rating: rating,
             comment: comment,
             approved: true,
             product: {
@@ -39,7 +37,7 @@ const CommentForm = ({id}: Props) => {
                 const res = await fetch(`${BASE_URL}/api/products/addRating`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data),
+                    body: JSON.stringify(review),
                 });
                 //  setTicket({ ...ticket, comments: res.data.comments });
                   setComment(''); // clear input field
@@ -59,25 +57,31 @@ const CommentForm = ({id}: Props) => {
             <div className="flex flex-col items-center py-6 space-y-3">
                 <span className="text-center">How was your experience?</span>
                 <div className="flex space-x-3">
-                    <button type="button" title="Rate 1 stars" aria-label="Rate 1 stars">
-                        <BsStarFill className="w-5 h-5 text-yellow-500"/>
+                    <button type="button" onClick={() => setRating(1)} title="Rate 1 stars" aria-label="Rate 1 stars" className='cursor-pointer'>
+                        <BsStarFill className={`w-5 h-5 ${rating >= 1 ? 'text-yellow-500' : 'text-gray-600'} hover:scale-110 duration-700 cursor-pointer`}/>
                     </button>
-                    <button type="button" title="Rate 2 stars" aria-label="Rate 2 stars">
-                        <BsStarFill className="w-5 h-5 text-yellow-500"/>
+                    <button type="button" onClick={() => setRating(2)} title="Rate 2 stars" aria-label="Rate 2 stars" className='cursor-pointer'>
+                        <BsStarFill className={`w-5 h-5 ${rating >= 2 ? 'text-yellow-500' : 'text-gray-600'} hover:scale-110 duration-700 cursor-pointer`}/>
                     </button>
-                    <button type="button" title="Rate 3 stars" aria-label="Rate 3 stars">
-                        <BsStarFill className="w-5 h-5 text-yellow-500"/>
+                    <button type="button" onClick={() => setRating(3)} title="Rate 3 stars" aria-label="Rate 3 stars" className='cursor-pointer'>
+                        <BsStarFill className={`w-5 h-5 ${rating >= 3 ? 'text-yellow-500' : 'text-gray-600'} hover:scale-110 duration-700 cursor-pointer`}/>
                     </button>
-                    <button type="button" title="Rate 4 stars" aria-label="Rate 4 stars">
-                        <BsStarFill className="w-5 h-5 text-yellow-500"/>
+                    <button type="button" onClick={() => setRating(4)} title="Rate 4 stars" aria-label="Rate 4 stars" className='cursor-pointer'>
+                        <BsStarFill className={`w-5 h-5 ${rating >= 4 ? 'text-yellow-500' : 'text-gray-600'} hover:scale-110 duration-700 cursor-pointer`}/>
                     </button>
-                    <button type="button" title="Rate 5 stars" aria-label="Rate 5 stars">
-                        <BsStarFill className="w-5 h-5 text-gray-600"/>
+                    <button type="button" onClick={() => setRating(5)} title="Rate 5 stars" aria-label="Rate 5 stars" className='cursor-pointer'>
+                        <BsStarFill className={`w-5 h-5 ${rating === 5 ? 'text-yellow-500' : 'text-gray-600'} hover:scale-110 duration-700 cursor-pointer`}/>
                     </button>
                 </div>
             </div>
             <div className="flex flex-col w-full">
-                <textarea rows={3} placeholder="Message..." className="p-4 rounded-md resize-none text-gray-100 bg-chelseaBlue border border-gold"></textarea>
+                <textarea
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}  
+                    rows={3} 
+                    placeholder="Message..." 
+                    className="p-4 rounded-md resize-none text-gray-100 bg-chelseaBlue border border-gold"
+                />
                 <button onClick={addComment} type="button" className="py-2 my-8 font-semibold rounded-md text-gray-900 bg-gold hover:bg-lightGold cursor-pointer duration-700 hover:scale-110">Leave feedback</button>
             </div>
         </div>
