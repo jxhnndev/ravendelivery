@@ -2,8 +2,6 @@
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { OrderType } from "@/types";
-import { FiEdit } from 'react-icons/fi'
 import { BASE_URL } from "@/utils";
 import { toast } from "react-toastify";
 import OrderList from "@/components/OrderList";

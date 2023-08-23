@@ -66,6 +66,12 @@ export const userOrdersQuery = groq`
  }
  `;
 
+export const userReviewsQuery = groq`
+*[_type == "review" && email==$email && !(_id in path('drafts.**'))]| order(_createdAt desc) {
+  ...,
+ }
+ `;
+
 export const specialOfferQuery = groq`
 *[_type == "specialOffer" && !(_id in path('drafts.**'))][0] {
   ...,

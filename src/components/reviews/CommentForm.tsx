@@ -1,4 +1,5 @@
 import { BASE_URL } from '@/utils'
+import { usePurchaseCheck, useReviewCheck } from '@/utils/reviewEligibilityCheck'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -15,8 +16,8 @@ const CommentForm = ({id}: Props) => {
 
     const { data: session, status } = useSession();
 
-    const alreadyReviewed = false
-    const notPurchased = false
+    const alreadyReviewed = useReviewCheck(session?.user.email!)
+    const notPurchased = usePurchaseCheck(session?.user.email!)
 
     const addComment = async (e: { preventDefault: () => void }) => {
         e.preventDefault(); // to block reloading page after comment is posted
