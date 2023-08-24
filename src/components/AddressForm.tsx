@@ -4,7 +4,7 @@ import React from "react";
 const AddressForm = () => {
   return (
     <form>
-      <div className="py-6 dark:border-gray-800">
+      <div className="py-6">
         <div className="w-full md:w-10/12">
           <div className="flex flex-wrap -m-3">
             <div className="w-full p-3 md:w-1/3">

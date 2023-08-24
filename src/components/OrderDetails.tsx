@@ -9,18 +9,18 @@ const discount = false // add this functionality later, discount status should c
 
 const OrderDetails = ({order}: IProps) => {
   return (
-    <div className="flex flex-col p-6 space-y-4 divide-y sm:p-10 divide-gray-700 dark:bg-gray-900 dark:text-gray-100">
+    <div className="flex flex-col p-6 space-y-4 divide-y sm:p-10 divide-gray-700">
         <h2 className="text-2xl font-semibold">Order Details</h2>
         <ul className="flex flex-col pt-4 space-y-2">
             {order?.products.map(item => (
                 <li key={item._key} className="flex items-start justify-between">
                     <h3>{item.title}
-                        <span className="text-sm dark:text-gold text-chelsea"> x {item.quantity}</span>
+                        <span className="text-sm text-chelseaBlue"> x {item.quantity}</span>
                     </h3>
                     <div className="text-right">
                         <span className="block">Total Price: $ {item.price!.toFixed(2)}</span>
-                        <span className="block text-sm dark:text-gray-400">Item Price: $ {item.itemPrice.toFixed(2)}</span>
-                        <span className="block text-sm dark:text-gray-400">Item Tax: $ {(item.price! - item.itemPrice).toFixed(2)}</span>
+                        <span className="block text-sm">Item Price: $ {item.itemPrice.toFixed(2)}</span>
+                        <span className="block text-sm">Item Tax: $ {(item.price! - item.itemPrice).toFixed(2)}</span>
                     </div>
                 </li>
             ))}
@@ -33,11 +33,11 @@ const OrderDetails = ({order}: IProps) => {
                 </div>
                 {discount ?
                 <div className="flex items-center space-x-2 text-xs">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-3 h-3 mt-1 fill-current dark:text-violet-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-3 h-3 mt-1 fill-current">
                         <path d="M485.887,263.261,248,25.373A31.791,31.791,0,0,0,225.373,16H64A48.055,48.055,0,0,0,16,64V225.078A32.115,32.115,0,0,0,26.091,248.4L279.152,486.125a23.815,23.815,0,0,0,16.41,6.51q.447,0,.9-.017a23.828,23.828,0,0,0,16.79-7.734L486.581,296.479A23.941,23.941,0,0,0,485.887,263.261ZM295.171,457.269,48,225.078V64A16.019,16.019,0,0,1,64,48H225.373L457.834,280.462Z"></path>
                         <path d="M148,96a52,52,0,1,0,52,52A52.059,52.059,0,0,0,148,96Zm0,72a20,20,0,1,1,20-20A20.023,20.023,0,0,1,148,168Z"></path>
                     </svg>
-                    <span className="dark:text-gray-400">Spend $20.00, get 20% off</span>
+                    <span className="">Spend $20.00, get 20% off</span>
                 </div>
                 : ""}
             </div>
@@ -62,7 +62,7 @@ const OrderDetails = ({order}: IProps) => {
                     <span>Shipping fee</span>
                     <span>$ {order?.shippingPrice.toFixed(2)}</span>
                 </div>
-                <a rel="noopener noreferrer" href="#" className="text-xs hover:underline dark:text-gold text-chelsea">How do our fees work?</a>
+                <a rel="noopener noreferrer" href="#" className="text-xs hover:underline text-chelseaBlue">How do our fees work?</a>
             </div>
             <div className="space-y-6">
                 <div className="flex justify-between">

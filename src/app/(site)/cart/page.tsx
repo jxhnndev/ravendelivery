@@ -52,7 +52,7 @@ const CartPage = () => {
       <div className="justify-center flex-1 px-4 py-6 mx-auto max-w-7xl lg:py-4 md:px-6 w-full">
          
         <div className="p-8 bg-lightGold">
-          <h2 className="mb-8 text-4xl font-bold dark:text-gray-400">Your Cart</h2>
+          <h2 className="mb-8 text-4xl font-bold">Your Cart</h2>
           {products.length === 0 ? 
           <div className="flex items-center justify-center flex-wrap gap-2 mb-4">
             Cart is empty
@@ -68,19 +68,19 @@ const CartPage = () => {
             <div className="w-full px-4 mb-8 xl:w-8/12 xl:mb-0">
               <div className="flex flex-wrap items-center mb-6 -mx-4 md:mb-8">
                 <div className="w-full md:block hidden px-4 mb-6 md:w-4/6 lg:w-6/12 md:mb-0">
-                  <h2 className="font-bold text-gray-500 dark:text-gray-400">Product name</h2>
+                  <h2 className="font-bold text-gray-500">Product name</h2>
                 </div>
                 <div className="hidden px-4 lg:block lg:w-2/12">
-                  <h2 className="font-bold text-gray-500 dark:text-gray-400">Price</h2>
+                  <h2 className="font-bold text-gray-500">Price</h2>
                 </div>
                 <div className="hidden md:block px-4 md:w-1/6 lg:w-2/12 ">
-                  <h2 className="font-bold text-gray-500 dark:text-gray-400">Quantity</h2>
+                  <h2 className="font-bold text-gray-500">Quantity</h2>
                 </div>
                 <div className="hidden md:block px-4 text-right md:w-1/6 lg:w-2/12 ">
-                  <h2 className="font-bold text-gray-500 dark:text-gray-400"> Subtotal</h2>
+                  <h2 className="font-bold text-gray-500"> Subtotal</h2>
                 </div>
               </div>
-              <div className="py-4 mb-8 border-t border-b border-gray-200 dark:border-gray-700">
+              <div className="py-4 mb-8 border-t border-b border-gray-200">
                 {products.map((item) => (
                 <div key={item.id} className="flex flex-wrap items-center mb-6 -mx-4 md:mb-8">
                   <div className="md:px-4 mb-6 md:w-4/6 lg:w-6/12 md:mb-0">
@@ -94,7 +94,7 @@ const CartPage = () => {
                       </div>
                       <div className="px-4">
                         <Link href={`/product/${item.slug}`} className="mb-2 text-base md:text-xl font-bold text-chelseaBlue hover:text-gold cursor-pointer">{item.title}</Link>
-                        <p className="text-gray-500 dark:text-gray-400 ">{item.optionTitle}</p>
+                        <p className="text-gray-500 ">{item.optionTitle}</p>
                         <button onClick={() => removeFromCart(item)} className="cursor-pointer text-xs text-red-700 hover:text-red-900">Remove from Cart</button>
                       </div>
                     </div>
@@ -112,7 +112,7 @@ const CartPage = () => {
                   
                   <div className="w-auto px-4 text-right md:w-1/6 lg:w-2/12 text-xs md:text-lg">
                     <span className="md:hidden mr-1">Subtotal:</span>
-                    <p className="font-bold text-yellow-500 dark:text-gray-400">${item.totalItemPrice.toFixed(2)}</p>
+                    <p className="font-bold text-yellow-500">${item.totalItemPrice.toFixed(2)}</p>
                   </div>
                 </div>
                 ))}
@@ -136,20 +136,20 @@ const CartPage = () => {
             </div>
             <div className="w-full sm:px-4 xl:w-4/12">
               <div className="p-6 border border-gold bg-lightGold md:p-8">
-                <h2 className="mb-8 text-base sm:text-3xl font-bold text-gray-700 dark:text-gray-400">Order Summary</h2>
-                <div className="flex items-center flex-wrap justify-between pb-4 mb-4 border-b border-gray-300 dark:border-gray-700 ">
-                  <span className="text-gray-700 dark:text-gray-400">Subtotal: {totalItems} items</span>
-                  <span className="text-xl font-bold text-gray-700 dark:text-gray-400 ">${totalPrice.toFixed(2)}</span>
+                <h2 className="mb-8 text-base sm:text-3xl font-bold text-gray-700">Order Summary</h2>
+                <div className="flex items-center flex-wrap justify-between pb-4 mb-4 border-b border-gray-300">
+                  <span className="text-gray-700">Subtotal: {totalItems} items</span>
+                  <span className="text-xl font-bold text-gray-700 ">${totalPrice.toFixed(2)}</span>
                 </div>
                 <div className="flex items-center flex-wrap justify-between pb-4 mb-4 ">
-                  <span className="text-gray-700 dark:text-gray-400 ">Shipping</span>
-                  <span className="text-xl font-bold text-gray-700 dark:text-gray-400 ">
+                  <span className="text-gray-700 ">Shipping</span>
+                  <span className="text-xl font-bold text-gray-700 ">
                     {shippingPrice === 0 ? "Free" : `$ ${shippingPrice}`}
                   </span>
                 </div>
                 <div className="flex items-center flex-wrap justify-between pb-4 mb-4 ">
-                  <span className="text-gray-700 dark:text-gray-400">Order Total</span>
-                  <span className="text-xl font-bold text-gray-700 dark:text-gray-400">${(totalPrice + shippingPrice).toFixed(2)}</span>
+                  <span className="text-gray-700">Order Total</span>
+                  <span className="text-xl font-bold text-gray-700">${(totalPrice + shippingPrice).toFixed(2)}</span>
                 </div>
                 <h2 className="text-xs sm:text-sm text-chelseaBlue mb-2">Payments powered by:</h2>
                 <div className="flex items-center mb-4 ">

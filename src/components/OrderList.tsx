@@ -24,7 +24,7 @@ const OrderList = ({data, isAdmin, handleUpdate}: IProps) => {
     }
   return (
     <>
-    <div className="container p-2 mx-auto sm:p-4 dark:text-gray-100">
+    <div className="container p-2 mx-auto sm:p-4">
         <h2 className="mb-4 text-2xl font-semibold leadi">Orders</h2>
         <div className="overflow-x-auto">
             <table className="min-w-full text-xs">
@@ -36,7 +36,7 @@ const OrderList = ({data, isAdmin, handleUpdate}: IProps) => {
                     <col></col>
                     <col className="w-24"></col>
                 </colgroup>
-                <thead className="bg-gold dark:bg-chelsea">
+                <thead className="bg-gold">
                     <tr className="text-left">
                         <th className="p-3">Order No.</th>
                         <th className="p-1">Order Item(s)</th>
@@ -48,7 +48,7 @@ const OrderList = ({data, isAdmin, handleUpdate}: IProps) => {
                 </thead>
                 <tbody>
                     {data.map((item) => (
-                    <tr key={item._id} className="border-b border-opacity-20 border-gold bg-lightGold dark:border-gray-700 dark:bg-chelsea/40">
+                    <tr key={item._id} className="border-b border-opacity-20 border-gold bg-lightGold">
                         <td className="p-3">
                             <p className='flex w-full flex-row justify-start'>
                                 <span className='py-2'>{item._id}</span>
