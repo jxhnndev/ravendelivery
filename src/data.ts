@@ -29,8 +29,8 @@ export const menu: Menu = [
   {
     id: 3,
     slug: "pizzas",
-    title: "Cheesy Pizzas",
-    desc: "Pizza Paradise: Irresistible slices, mouthwatering toppings, and cheesy perfection.",
+    title: "Delicious Pizzas",
+    desc: "Our hand-tossed pizza brings a mouthwatering symphony of fresh dough, tangy sauce, and melted cheese.",
     img: "/temporary/m3.png",
     color: "white",
   },
