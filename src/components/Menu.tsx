@@ -7,15 +7,13 @@ import { CartIcon } from '.';
 import { BiSolidFoodMenu } from 'react-icons/bi'
 import { MdRestaurantMenu } from 'react-icons/md'
 import Image from 'next/image';
+import { NavLink } from "@/types";
 
-const links = [
-  { id: 1, title: "Home", url: "/" },
-  { id: 2, title: "Menu", url: "/menu" },
-  { id: 3, title: "About", url: "/about" },
-  { id: 4, title: "Contact", url: "/contact" },
-];
+type Props = {
+  links: NavLink[]
+}
 
-const Menu = () => {
+const Menu = ({links}: Props) => {
   const [open, setOpen] = useState(false)
 
   const { status } = useSession()
@@ -30,7 +28,7 @@ const Menu = () => {
       {open && (
         <div className="bg-chelseaBlue text-white absolute left-0 top-24 w-full h-[calc(100vh-6rem)] flex flex-col gap-8 items-center justify-center text-2xl z-10">
           {links.map((item) => (
-            <Link href={item.url} key={item.id} onClick={() => setOpen(false)} className="hover:text-gold ">
+            <Link href={item.href} key={item.id} onClick={() => setOpen(false)} className="hover:text-gold ">
               {item.title}
             </Link>
           ))}

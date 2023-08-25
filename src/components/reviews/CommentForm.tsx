@@ -18,14 +18,14 @@ const CommentForm = ({id}: Props) => {
 
     const { data: session, status } = useSession();
 
-    //remporary function to reload reviews, todo - implement dynamic refreshing from db as soon as comment is posted
+    //temporary function to reload reviews, todo - implement dynamic refreshing from db as soon as comment is posted
     const router = useRouter()
     const handleRefresh = () => {
         router.refresh();
         setSubmitted(false)
       };
 
-    const alreadyReviewed = useReviewCheck(id) // add in usestate to fetch fresh data?
+    const alreadyReviewed = useReviewCheck(id) // add in usestate to fetch fresh data or react query?
     const notPurchased = usePurchaseCheck(id)
 
     const addComment = async (e: { preventDefault: () => void }) => {

@@ -17,11 +17,6 @@ const ProductCard = ({item}: Props) => {
 
     const { addToCart } = useCartStore()
 
-    
-      
-     
-    
-
     const handleCart = ()=>{
         addToCart({
           id: item._id,
@@ -35,7 +30,7 @@ const ProductCard = ({item}: Props) => {
           tax: item.tax, 
           slug: item.slug.current,
         })
-        toast.success("The product added to the cart!")
+        toast.success(`${item.name} added to the cart!`)
       }
   return (
     <div
@@ -55,7 +50,7 @@ const ProductCard = ({item}: Props) => {
         )}
         {/* TEXT CONTAINER */}
         <div className=" flex-1 flex flex-col items-center justify-center text-center gap-4">
-            <Link href={`/product/${item.slug.current}`} className="text-xl font-bold uppercase xl:text-2xl 2xl:text-3xl mt-5 cursor-pointer hover:text-chelseaBlue">{item.name}</Link>
+            <Link href={`/product/${item.slug.current}`} className="text-xl font-bold uppercase xl:text-2xl 2xl:text-3xl mt-5 cursor-pointer hover:text-chelseaBlue z-30">{item.name}</Link>
             <p className="p-4 2xl:p-8">{item.details}</p>
             <span className="text-xl font-bold">${item.taxPrice}</span>
             <button onClick={handleCart} className="bg-chelseaBlue hover:bg-gold duration-500 text-white p-2 rounded-md cursor-pointer">

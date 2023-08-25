@@ -9,7 +9,7 @@ import DeleteButton from '@/components/DeleteButton';
 
 const links = [
   { id: 1, title: "Menu", url: "/menu" },
-  { id: 2, title: "Pizzas", url: "/menu/pizzas" },
+ // { id: 2, title: "Pizzas", url: "/menu/pizzas" }, // TO DO - make this dynamic based on product category
 ];
 
 const ProductPage = async ({ params }: { params: { slug: string } }) => {

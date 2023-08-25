@@ -6,6 +6,11 @@ const UserLinks = () => {
   const { status } = useSession();
   return (
     <div className="font-semibold">
+      {status === "loading" ? 
+      <>
+      </>
+      :
+      <>
       {status === "authenticated" ? (
         <div>
           <Link href="/orders" className="cursor-pointer hover:text-chelseaBlue duration-700">Orders</Link>
@@ -14,6 +19,8 @@ const UserLinks = () => {
       ) : (
         <Link href="/login" className="cursor-pointer hover:text-chelseaBlue duration-700 bg-chelseaBlue hover:bg-gold rounded-md px-2 py-1">Login</Link>
       )}
+      </>
+      }
     </div>
   );
 };

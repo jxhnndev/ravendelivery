@@ -1,6 +1,6 @@
 import { Rating } from '@/types'
 import React from 'react'
-import { BsStarFill } from 'react-icons/bs'
+import { BsStarFill, BsStarHalf } from 'react-icons/bs'
 import RatingLine from './RatingLine'
 
 type Props = {
@@ -20,14 +20,16 @@ const Ratings = ({data}: Props) => {
         const myNums = data.map((item: any) => {
             return item.rating
         })
-        // use reduce() method to find the sum
+        // find the sum
         let sum = myNums.reduce((accumulator: any, currentValue: any) => {
         return accumulator + currentValue
         },0);
         // calculate and return average
         const average = sum / myNums.length
-        return average.toFixed(1)
+        return Number(average.toFixed(1)) === Number(average.toFixed(0)) ? average.toFixed(0) : average.toFixed(1)
     }
+
+    const currentRating = calculateAverage()
 
     const ratings = [
         {
@@ -62,23 +64,18 @@ const Ratings = ({data}: Props) => {
             <h2 className="text-3xl font-semibold text-center">Customer reviews</h2>
             <div className="flex flex-wrap items-center mt-2 mb-1 space-x-2">
                 <div className="flex">
-                    <button type="button" title="Rate 1 stars" aria-label="Rate 1 stars">
-                        <BsStarFill className="w-5 h-5 text-yellow-500"/>
-                    </button>
-                    <button type="button" title="Rate 2 stars" aria-label="Rate 2 stars">
-                        <BsStarFill className="w-5 h-5 text-yellow-500"/>
-                    </button>
-                    <button type="button" title="Rate 3 stars" aria-label="Rate 3 stars">
-                        <BsStarFill className="w-5 h-5 text-yellow-500"/>
-                    </button>
-                    <button type="button" title="Rate 4 stars" aria-label="Rate 4 stars">
-                        <BsStarFill className="w-5 h-5 text-gray-600"/>
-                    </button>
-                    <button type="button" title="Rate 5 stars" aria-label="Rate 5 stars">
-                        <BsStarFill className="w-5 h-5 text-gray-600"/>
-                    </button>
+                    {/**create a more easy to read version later */}
+                    <BsStarFill className={`w-5 h-5 ${Number(currentRating) >= 1 ? 'text-yellow-500' : 'text-gray-600'}`}/>
+                    <BsStarHalf className={`w-5 h-5 ${(Number(currentRating) > 1 && Number(currentRating) < 2) ? 'text-yellow-500' : 'hidden'}`}/>
+                    <BsStarFill className={`w-5 h-5 ${Number(currentRating) >= 2 ? 'text-yellow-500' : 'text-gray-600'}`}/>
+                    <BsStarHalf className={`w-5 h-5 ${(Number(currentRating) > 2 && Number(currentRating) < 3) ? 'text-yellow-500' : 'hidden'}`}/>
+                    <BsStarFill className={`w-5 h-5 ${Number(currentRating) >= 3 ? 'text-yellow-500' : 'text-gray-600'}`}/>
+                    <BsStarHalf className={`w-5 h-5 ${(Number(currentRating) > 3 && Number(currentRating) < 4) ? 'text-yellow-500' : 'hidden'}`}/>
+                    <BsStarFill className={`w-5 h-5 ${Number(currentRating) >= 4 ? 'text-yellow-500' : 'text-gray-600'}`}/>
+                    <BsStarHalf className={`w-5 h-5 ${(Number(currentRating) > 4 && Number(currentRating) < 5) ? 'text-yellow-500' : 'hidden'}`}/>
+                    <BsStarFill className={`w-5 h-5 ${Number(currentRating) === 5 ? 'text-yellow-500' : (Number(currentRating) === 1 || Number(currentRating) === 2 || Number(currentRating) === 3 || Number(currentRating) === 4) ? "text-gray-600" : 'hidden'}`}/>
                 </div>
-                <span className="text-gray-400">{calculateAverage()} out of 5</span>
+                <span className="text-gray-400">{currentRating} out of 5</span>
             </div>
             <p className="text-sm text-gray-400">{data.length === 1 ? `${data.length} rating` : `${data.length} ratings`}</p>
             <div className="flex flex-col mt-4">

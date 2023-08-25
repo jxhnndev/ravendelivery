@@ -133,3 +133,9 @@ export type Rating = {
   title: string,
   percentage: number
 }
+
+export type NavLink = {
+  id: number,
+  title: string,
+  href: string
+}

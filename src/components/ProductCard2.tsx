@@ -30,7 +30,7 @@ const ProductCard2 = ({item}: Props) => {
           tax: item.tax, 
           slug: item.slug.current,
         })
-        toast.success("The product added to the cart!")
+        toast.success(`${item.name} added to the cart!`)
       }
   return (
     <div

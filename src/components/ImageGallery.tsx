@@ -44,6 +44,8 @@ const ImageGallery = ({image, gallery}: Props) => {
                     height={0}
                     sizes="100vw"
                     className='w-full h-auto'
+                    placeholder="blur"
+                    blurDataURL={imageProps.src}
                 />
             </div>
         </div>
