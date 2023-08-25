@@ -1,3 +1,43 @@
+## Project Description
+
+Restaurant website with food order functionality.
+
+**Technology used:**
+
+- Next.js - Frontend and APIs
+- React - Frontend
+- Tailwind CSS
+- Stripe - for payments
+- Sanity.io - CMS
+- Zustand, React Context - State management
+
+**Features:**
+
+- Display featured items on landing page
+- Filter products based on category on menu/[category] page
+- Option to choose different food size on product/[slug] page
+- Add and view Product reviews  
+- Global *Add to cart* function
+- Custom Stripe Checkout UI
+- Create order in *Sanity.io* CMS and update order status once getting confirmation from Stripe that Order is paid
+- Admin/Customer authentication and authorization (Next Auth, Google login)
+- Admin dashboard with ability to update order delivery status
+- Customer Order dashboard
+- Add Voucher code text to clipboard by clicking on it
+- etc.
+
+**Upcoming:**
+
+- Final touches to some UI elements, mobile responsiveness fixes
+- Bug fixes
+- Add Product functionality for Admins
+- Restaurant Menu / Daily Menu pages
+- update order status via Stripe webhooks
+- etc.
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
