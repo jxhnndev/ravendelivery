@@ -8,6 +8,7 @@ import QueryProvider from '@/components/providers/QueryProvider'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { ModalProvider } from '@/components/providers/ModalProvider'
+import ChatWidget from '@/components/chat/ChatWidget'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,6 +32,7 @@ export default function RootLayout({
                 <Banner />
                 <Navbar />
                 {children}
+                <ChatWidget/>
                 <Footer/>
                 <ToastContainer position="top-center" theme="dark" autoClose={2000} draggable/>
               </div>

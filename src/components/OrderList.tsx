@@ -34,7 +34,7 @@ const OrderList = ({data, isAdmin, handleUpdate}: IProps) => {
                     <col></col>
                     <col></col>
                     <col></col>
-                    <col className="w-24"></col>
+                    <col className="w-min"></col>
                 </colgroup>
                 <thead className="bg-gold">
                     <tr className="text-left">
@@ -43,7 +43,7 @@ const OrderList = ({data, isAdmin, handleUpdate}: IProps) => {
                         <th className="p-3">Payment Status</th>
                         <th className="p-3">Created at</th>
                         <th className="p-3 text-right">Total Price</th>
-                        <th className="p-3">Status</th>
+                        <th className="p-3 text-center">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,7 +100,7 @@ const OrderList = ({data, isAdmin, handleUpdate}: IProps) => {
                                 </form>
                             </td>
                         ) : (
-                            <td className="p-3 text-right">
+                            <td className="text-center">
                                 <span className={`px-3 py-1 font-semibold capitalize rounded-md ${item.status === "delivered" ? "bg-green-500" : "bg-red-500"} text-gray-100`}>
                                     <span>{item.status}</span>
                                 </span>
