@@ -1,4 +1,4 @@
-import { NavLink } from "./types";
+import { ChatMessageType, NavLink } from "./types";
 
 type Menu = {
   id: number;
@@ -51,5 +51,29 @@ export const navLinks: NavLink[] = [
     id: 3,
     title: "Contact",
     href: "/contact"
+  },
+];
+
+export const chatMessages: ChatMessageType[] = [
+  {
+    id: "1",
+    text: "Hi, I am a test bot, How can I help you?",
+    name: "Test Bot",
+    timestamp: "2023-08-28T14:34:29Z",
+    outbound: false
+  },
+  {
+    id: "2",
+    text: "I want to test an outbound message.",
+    name: "User Test",
+    timestamp: "2023-08-28T14:35:29Z",
+    outbound: true
+  },
+  {
+    id: "3",
+    text: "At the moment this is FE test only. Chat is not connected to BE.",
+    name: "Test Bot",
+    timestamp: "2023-08-28T14:36:29Z",
+    outbound: false
   },
 ];

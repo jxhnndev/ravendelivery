@@ -139,3 +139,11 @@ export type NavLink = {
   title: string,
   href: string
 }
+
+export type ChatMessageType = {
+  id: string,
+  text: string,
+  name: string,
+  timestamp: string,
+  outbound: boolean
+}
