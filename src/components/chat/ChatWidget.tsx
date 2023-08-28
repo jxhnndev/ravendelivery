@@ -13,6 +13,8 @@ import { v4 as uuid } from "uuid";
 const ChatWidget = () => {
   const [outboundMessage, setOutBoundMessage] = useState<string>("")
   const [messages, setMessages] = useState<ChatMessageType[]>([])
+  const [prompts, setPrompts] = useState(true)
+  const [visiblePrompts, setVisiblePrompts] = useState([1,2])
 
   const messagesEndRef = useRef<any>(null)
   const scrollToBottom = () => {
@@ -22,7 +24,7 @@ const ChatWidget = () => {
     scrollToBottom()
   }, [messages]);
 
-  const handleSend = (event: any, message: ChatMessageType) => {
+  const handleSend = (event: any, message: ChatMessageType, promptId?: number) => {
     event.preventDefault()
     const newMessage = {
       id: message.id,
@@ -36,12 +38,13 @@ const ChatWidget = () => {
       id: uuid(),
       text: inboundMessage,
       name: "Test Bot",
-      timestamp: "2023-08-28T14:34:29Z",
+      timestamp: new Date().toISOString(),
       outbound: false,
     }
-    const newMessages = [...messages, newMessage, botReply]
+    const newMessages = message.outbound ? [...messages, newMessage, botReply] : [...messages, newMessage]
     setMessages(newMessages)
     setOutBoundMessage("")
+    promptId === 1 ? setVisiblePrompts([2]) : visiblePrompts.length === 1 || promptId === 2 || promptId === undefined ? setVisiblePrompts([]) : setVisiblePrompts([1]) // test only, make this more dynamic later
   }
   return (
     <div>
@@ -156,8 +159,50 @@ const ChatWidget = () => {
                               </span> 
                             </div>
                           ))}
-                         
-                    
+
+                          {prompts ? 
+                          <>
+                          <div className={`${visiblePrompts.includes(1) ? "" : "hidden"} flex justify-end pt-2 pl-10`}> 
+                            <button
+                              onClick={(event) => handleSend(
+                                event,
+                                {
+                                  id: uuid(),
+                                  text: "This is a UI version of the chat. Under development",
+                                  name: "Test Bot",
+                                  timestamp: new Date().toISOString(),
+                                  outbound: false,
+                                },
+                                1
+                              )}  
+                              className="border border-md border-gold h-auto text-chelseaBlue text-xs sm:text-sm font-normal rounded-md px-1 p-1 items-end flex justify-end cursor-pointer"
+                            >
+                              Tell me more about this chat.
+                            </button> 
+                          </div>
+
+                          <div className={`${visiblePrompts.includes(2) ? "" : "hidden"} flex justify-end pt-2 pl-10`}> 
+                            <button
+                              onClick={(event) => handleSend(
+                                event,
+                                {
+                                  id: uuid(),
+                                  text: "At the moment this option is not available, but you can test sending messages from input form",
+                                  name: "Test Bot",
+                                  timestamp: new Date().toISOString(),
+                                  outbound: false,
+                                },
+                                2
+                              )} 
+                              className="border border-md border-gold h-auto text-chelseaBlue text-xs sm:text-sm font-normal rounded-md px-1 p-1 items-end flex justify-end "
+                            >
+                              I want to chat with a human.
+                            </button> 
+                          </div>
+                          </>
+                          : 
+                          <></>
+                          }
                         </div>
                         {/**input field and send button */}
                         <div className="flex flex-wrap justify-between items-center p-1 py-2 border-t border-gold">
@@ -179,7 +224,7 @@ const ChatWidget = () => {
                                   id: uuid(),
                                   text: outboundMessage!,
                                   name: "User Test",
-                                  timestamp: "2023-08-28T14:34:29Z",
+                                  timestamp: new Date().toISOString(),
                                   outbound: true,
                                 },
                               )} 
