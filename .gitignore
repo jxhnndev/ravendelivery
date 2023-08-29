@@ -38,3 +38,4 @@ next-env.d.ts
 #testpages
 /src/app/(site)/test
 /src/app/(site)/add
+/src/utils/store2

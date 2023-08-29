@@ -9,7 +9,7 @@ import { useEffect } from "react"
 import { FaStripe } from 'react-icons/fa'
 
 const CartPage = () => {
-  const { products, totalItems, totalPrice, shippingPrice, tax, taxPrice, itemsPrice, removeFromCart, resetCart } = useCartStore();
+  const { cartItems, totalItems, totalPrice, shippingPrice, tax, taxPrice, itemsPrice, removeFromCart, resetCart } = useCartStore();
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -20,7 +20,7 @@ const CartPage = () => {
   const handleCheckout = async () => {
     if (!session) {
       router.push("/login");
-    } else if (products.length > 0) {
+    } else if (cartItems.length > 0) {
       try {
         const res = await fetch(`${BASE_URL}/api/orders`, {
           method: "POST",
@@ -28,7 +28,7 @@ const CartPage = () => {
           body: JSON.stringify({
             userEmail: session.user.email,
             itemsPrice: itemsPrice,
-            products,
+            cartItems,
             shippingPrice: shippingPrice,
             tax: tax,
             taxPrice: taxPrice,
@@ -53,7 +53,7 @@ const CartPage = () => {
          
         <div className="p-8 bg-lightGold">
           <h2 className="mb-8 text-4xl font-bold">Your Cart</h2>
-          {products.length === 0 ? 
+          {cartItems.length === 0 ? 
           <div className="flex items-center justify-center flex-wrap gap-2 mb-4">
             Cart is empty
             <Link
@@ -81,7 +81,7 @@ const CartPage = () => {
                 </div>
               </div>
               <div className="py-4 mb-8 border-t border-b border-gray-200">
-                {products.map((item) => (
+                {cartItems.map((item) => (
                 <div key={item.id} className="flex flex-wrap items-center mb-6 -mx-4 md:mb-8">
                   <div className="md:px-4 mb-6 md:w-4/6 lg:w-6/12 md:mb-0">
                     <div className="flex flex-wrap items-center">
@@ -125,8 +125,8 @@ const CartPage = () => {
                 <span className="text-gray-700">Apply Coupon</span>
                 <input type="text"  placeholder="x304k45" className="block cursor-text w-full sm:w-1/3 rounded-md shadow-sm bg-white px-2 placeholder-gray-300" />
                 <button
-                    disabled={products.length > 0 ? false : true} 
-                    className={`block px-1 md:px-2 py-1 md:py-2 font-bold text-center uppercase duration-500 cursor-pointer text-white ${(products.length > 0) ? "bg-gold hover:bg-chelseaBlue" : "bg-gold/80 opacity-80 cursor-not-allowed"} rounded-md`}
+                    disabled={cartItems.length > 0 ? false : true} 
+                    className={`block px-1 md:px-2 py-1 md:py-2 font-bold text-center uppercase duration-500 cursor-pointer text-white ${(cartItems.length > 0) ? "bg-gold hover:bg-chelseaBlue" : "bg-gold/80 opacity-80 cursor-not-allowed"} rounded-md`}
                     onClick={() => alert("Coupons are work in progress")}
                   >
                     Apply
@@ -159,15 +159,15 @@ const CartPage = () => {
                 </div>
                 <div className="flex text-xs sm:text-base items-center flex-wrap gap-2 justify-between">
                   <button
-                    disabled={products.length > 0 ? false : true} 
-                    className={`block w-full sm:w-auto px-2 py-2 font-bold text-center uppercase duration-500 cursor-pointer text-white ${(products.length > 0) ? "bg-red-500 hover:bg-chelseaBlue" : "bg-gold/80 opacity-80 cursor-not-allowed"} rounded-md`}
+                    disabled={cartItems.length > 0 ? false : true} 
+                    className={`block w-full sm:w-auto px-2 py-2 font-bold text-center uppercase duration-500 cursor-pointer text-white ${(cartItems.length > 0) ? "bg-red-500 hover:bg-chelseaBlue" : "bg-gold/80 opacity-80 cursor-not-allowed"} rounded-md`}
                     onClick={resetCart}
                   >
                     Clear Cart
                   </button>
                   <button
-                    disabled={products.length > 0 ? false : true} 
-                    className={`block w-full sm:w-auto px-2 py-2 font-bold text-center uppercase duration-500 cursor-pointer text-white ${(products.length > 0) ? "bg-gold hover:bg-chelseaBlue" : "bg-gold/80 opacity-80 cursor-not-allowed"} rounded-md`}
+                    disabled={cartItems.length > 0 ? false : true} 
+                    className={`block w-full sm:w-auto px-2 py-2 font-bold text-center uppercase duration-500 cursor-pointer text-white ${(cartItems.length > 0) ? "bg-gold hover:bg-chelseaBlue" : "bg-gold/80 opacity-80 cursor-not-allowed"} rounded-md`}
                     onClick={handleCheckout}
                   >
                     Checkout
