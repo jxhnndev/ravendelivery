@@ -39,7 +39,7 @@ const CartPage = () => {
           }),
         });
         const data = await res.json()
-        data ? router.push(`/pay/${data._id}`) : alert("Something went wrong")
+        router.push(`/pay/${data._id}`)
       } catch (err) {
         console.log(err);
       }

@@ -51,11 +51,11 @@ const OrderDetails = ({order}: IProps) => {
         <div className="pt-4 space-y-2">
             <div className="flex justify-between">
                 <span>Tax</span>
-                <span>$ {((order?.tax!- 1) * order?.itemsPrice!).toFixed(2)}</span>
+                <span>$ {(order?.tax!).toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>$ {order?.price.toFixed(2)}</span>
+                <span>$ {order?.taxPrice.toFixed(2)}</span>
             </div>
             <div className="flex flex-col">
                 <div className="flex justify-between">
