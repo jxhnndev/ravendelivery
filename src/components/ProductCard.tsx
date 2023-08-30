@@ -20,14 +20,15 @@ const ProductCard = ({item}: Props) => {
     const handleCart = ()=>{
         addToCart({
           id: item._id,
+          uniqueId: item._id + "small",
           title: item.name,
           img: imageProps,
           itemPrice: item.mainPrice,
-          totalItemPrice: item.taxPrice,
+          subTotal: item.mainPriceTaxed,
           quantity: 1,
           optionTitle: "small",
-          taxPrice: item.taxPrice, 
-          tax: item.tax, 
+          mainPriceTaxed: item.mainPriceTaxed, 
+          itemTax: item.tax, 
           slug: item.slug.current,
         })
         toast.success(`${item.name} added to the cart!`)
@@ -52,7 +53,7 @@ const ProductCard = ({item}: Props) => {
         <div className=" flex-1 flex flex-col items-center justify-center text-center gap-4">
             <Link href={`/product/${item.slug.current}`} className="text-xl font-bold uppercase xl:text-2xl 2xl:text-3xl mt-5 cursor-pointer hover:text-chelseaBlue z-30">{item.name}</Link>
             <p className="p-4 2xl:p-8">{item.details}</p>
-            <span className="text-xl font-bold">${item.taxPrice}</span>
+            <span className="text-xl font-bold">${item.mainPriceTaxed}</span>
             <button onClick={handleCart} className="bg-chelseaBlue hover:bg-gold duration-500 text-white p-2 rounded-md cursor-pointer">
                 Add to Cart
             </button>

@@ -36,8 +36,13 @@ export type Product = {
   image: ImageType
   mainPrice: number;
   tax: number;
-  taxPrice: number;
-  priceOptions?: { title: string; additionalPrice: number }[];
+  mainPriceTaxed: number;
+  priceOptions?: { 
+    title: string; 
+    additionalPriceMainPrice: number;
+    additionalPriceTax: number; 
+    additionalPrice: number 
+  }[];
   featured: boolean;
   details: string;
   gallery?: Gallery;
@@ -90,17 +95,29 @@ export type CartType = {
 
 export type CartItemType = {
   id?: string;
-  _key?: string;
+  uniqueId: string;
   title: string;
   img?: { src: string};
-  price?: number;
-  totalItemPrice: number; // itemPrice + tax + additionalPrice
-  itemPrice: number;
-  tax: number;
-  taxPrice: number;
+  subTotal: number; // (itemPrice + tax + additionalPrice) * quantity
+  itemPrice: number; // mainPrice + additionalPriceMainPrice
+  itemTax: number; // mainPriceTaxed + additionalPriceTax
+  mainPriceTaxed: number; // itemPrice + tax + additionalPrice
   optionTitle?: string;
   quantity: number;
   slug?: string;
+};
+
+export type OrderItemType = {
+  _key: string;
+  _type: string;
+  title: string;
+  image: string;
+  price: number;
+  itemPrice: number; // mainPrice + additionalPriceMainPrice
+  tax: number; // mainPriceTaxed + additionalPriceTax
+  taxPrice: number; // itemPrice + tax + additionalPrice
+  optionTitle: string;
+  quantity: number;
 };
 
 export type OrderType = {
@@ -113,7 +130,7 @@ export type OrderType = {
   taxPrice: number;
   shippingPrice: number;
   paymentMethod: string;
-  products: CartItemType[];
+  products: OrderItemType[];
   paymentStatus: string;
   status: string;
   orderedBy: UserType;

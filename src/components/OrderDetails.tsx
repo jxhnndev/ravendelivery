@@ -20,7 +20,7 @@ const OrderDetails = ({order}: IProps) => {
                     <div className="text-right">
                         <span className="block">Total Price: $ {item.price!.toFixed(2)}</span>
                         <span className="block text-sm">Item Price: $ {item.itemPrice.toFixed(2)}</span>
-                        <span className="block text-sm">Item Tax: $ {(item.price! - item.itemPrice).toFixed(2)}</span>
+                        <span className="block text-sm">Item Tax: $ {(item.tax).toFixed(2)}</span>
                     </div>
                 </li>
             ))}

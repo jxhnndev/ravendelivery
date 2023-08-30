@@ -24,25 +24,27 @@ const Price = ({ product }: { product: Product }) => {
   useEffect(() => {
     if (product.priceOptions?.length) {
       setTotal(
-        quantity * (product.taxPrice + product.priceOptions[selected].additionalPrice)
+        quantity * (product.mainPriceTaxed + product.priceOptions[selected].additionalPrice)
       );
     }
   }, [quantity, selected, product])
 
   const handleCart = ()=>{
+    const size = selected === 0 ? "small" :  selected === 1 ? "medium" : "large"
     addToCart({
       id: product._id,
+      uniqueId: product._id + size,
       title: product.name,
      // test: product._id + product.name.replace(/\s/g, ''),
       img: imageProps,
-      itemPrice: (product.mainPrice + (product.priceOptions![selected].additionalPrice / product.tax)) * quantity,
-      totalItemPrice: total,
+      itemPrice: (product.mainPrice + (product.priceOptions![selected].additionalPriceMainPrice)),
+      itemTax: product.tax + product.priceOptions![selected].additionalPriceTax, 
+      subTotal: Number(total.toFixed(2)),
       quantity: quantity,
       ...(product.priceOptions?.length && {
         optionTitle: product.priceOptions[selected].title,
       }),
-      taxPrice: (product.taxPrice + product.priceOptions![selected].additionalPrice), 
-      tax: product.tax, 
+      mainPriceTaxed: (product.mainPriceTaxed + product.priceOptions![selected].additionalPrice), 
       slug: product.slug.current,
     })
     toast.success("The product added to the cart!")

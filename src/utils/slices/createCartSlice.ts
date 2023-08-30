@@ -1,19 +1,15 @@
 import { CartItemType } from "@/types";
 import { StateCreator } from "zustand";
 
-// v0.1 functions work
-// pricing calculations are not correct for some use cases
-//TO DO - FIX CALCULATIONS!
- 
-
+// TO DO - create a function to calculate totals. in add/remove part both have same logic of calculations
 export interface CartSlice {
     cartItems: CartItemType[];
     totalItems: number;
-    totalPrice: number;
-    tax: number;
-    taxPrice: number;
+    totalItemsPrice: number;
+    totalTax: number;
+    subTotal: number;
     shippingPrice: number;
-    itemsPrice: number;
+    totalPrice: number;
     addToCart: (item: CartItemType) => void;
     removeFromCart: (item: CartItemType) => void;
     resetCart:() => void;
@@ -25,66 +21,70 @@ export interface CartSlice {
 const INITIAL_STATE = {
     cartItems: [],
     totalItems: 0,
-    totalPrice: 0,
-    tax: 0,
-    taxPrice: 0,
+    totalItemsPrice: 0,
+    totalTax: 0,
+    subTotal: 0,
     shippingPrice: 0,
-    itemsPrice: 0,
+    totalPrice: 0
   };
 
 export const createCartSlice: StateCreator<CartSlice> = (set, get) => ({
     cartItems: [],
     totalItems: INITIAL_STATE.totalItems,
-    totalPrice: INITIAL_STATE.totalPrice,
-    tax: INITIAL_STATE.tax,
-    taxPrice: INITIAL_STATE.taxPrice,
+    totalItemsPrice: INITIAL_STATE.totalItemsPrice,
+    totalTax: INITIAL_STATE.totalTax,
+    subTotal: INITIAL_STATE.subTotal,
     shippingPrice: INITIAL_STATE.shippingPrice,
-    itemsPrice: INITIAL_STATE.itemsPrice,
+    totalPrice: INITIAL_STATE.totalPrice,
     addToCart: (item: CartItemType) => {
         const cartItems = get().cartItems;
         const findProduct = cartItems.find(cartItem => cartItem.id === item.id && cartItem.optionTitle === item.optionTitle);
         if (findProduct) {
             findProduct.quantity! += item.quantity;
+            findProduct.subTotal! += item.subTotal;
         } else {
             cartItems.push({ ...item, quantity: item.quantity });
         }
-        /*
-        set({ 
-            cartItems 
-        });
-        * */
-        set((state) => ({
-            cartItems: cartItems,
-            totalItems: state.totalItems + item.quantity,
-            totalPrice: state.totalPrice + item.totalItemPrice,
-            tax: 1.2,
-            taxPrice: state.taxPrice + Number((item.taxPrice * item.quantity).toFixed(2)),
-            itemsPrice: state.itemsPrice + item.itemPrice,
-            shippingPrice: state.shippingPrice, // to figure out how to calculate this
-          }));
+        const totalCartItems = cartItems.map(i=>i.quantity).reduce((a,b)=>a+b)
+        const totalCartItemsPrice = cartItems.map(i=>i.itemPrice * i.quantity).reduce((a,b)=>a+b)
+        const totalCartItemsTax = cartItems.map(i=>i.itemTax * i.quantity).reduce((a,b)=>a+b)
+        const cartItemsSubTotal = cartItems.map(i=>i.subTotal).reduce((a,b)=>a+b)
+        const calculatedShippingPrice = totalCartItems < 5 ? 10 : 0
 
+        set(() => ({
+            cartItems: cartItems,
+            totalItems: Number(totalCartItems.toFixed(2)),
+            totalItemsPrice: Number(totalCartItemsPrice.toFixed(2)),
+            totalTax: Number(totalCartItemsTax.toFixed(2)),
+            subTotal: Number(cartItemsSubTotal.toFixed(2)),
+            shippingPrice: Number(calculatedShippingPrice.toFixed(2)), 
+            totalPrice: Number((cartItemsSubTotal + calculatedShippingPrice).toFixed(2))
+          }));
     },
     removeFromCart: (item: CartItemType) => {
-        // TO DO
-        // Find item plus size, fetch quantity and price that is in current cart and deduct it
-        /** 
-        set({ cartItems: get().cartItems.filter(cartItem => cartItem.id !== item.id) })
-         */
-        set((state) => ({
-          //  ((product) => (product.id! + product.optionTitle!.replace(/\s/g, '') !== item.id! + item.optionTitle!.replace(/\s/g, '') ) )
-            cartItems: get().cartItems.filter(cartItem => (cartItem.id + cartItem.optionTitle!.replace(/\s/g, '')) !== (item.id + item.optionTitle!.replace(/\s/g, ''))), // this one needs change, messes up items in cart
-            totalItems: state.totalItems - item.quantity,
-            totalPrice: state.totalPrice - Number((item.totalItemPrice * item.quantity).toFixed(2)),
-            tax: 1.2, // this needs change
-            taxPrice: state.taxPrice - Number((item.taxPrice * item.quantity).toFixed(2)),
-            itemsPrice: state.itemsPrice - item.itemPrice,
-            shippingPrice: state.shippingPrice, // to figure out how to calculate this
+        const cartItems = get().cartItems.filter(
+            cartItem => (cartItem.uniqueId !== item.uniqueId)
+        )
+        const totalCartItems = cartItems.map(i=>i.quantity).reduce((a,b)=>a+b)
+        const totalCartItemsPrice = cartItems.map(i=>i.itemPrice * i.quantity).reduce((a,b)=>a+b)
+        const totalCartItemsTax = cartItems.map(i=>i.itemTax * i.quantity).reduce((a,b)=>a+b)
+        const cartItemsSubTotal = cartItems.map(i=>i.subTotal).reduce((a,b)=>a+b)
+        const calculatedShippingPrice = totalCartItems < 5 ? 10 : 0
+        
+        set(() => ({
+            cartItems: cartItems,
+            totalItems: Number(totalCartItems.toFixed(2)),
+            totalItemsPrice: Number(totalCartItemsPrice.toFixed(2)),
+            totalTax: Number(totalCartItemsTax.toFixed(2)),
+            subTotal: Number(cartItemsSubTotal.toFixed(2)),
+            shippingPrice: Number(calculatedShippingPrice.toFixed(2)), 
+            totalPrice: Number((cartItemsSubTotal + calculatedShippingPrice).toFixed(2))
           }));
     },
     // not used yet, will be added on cart page plus and minus buttons. TO DO - should also update states of totalitems, tax, etc.
     updateQuantity: (productId: string, action: 'increase' | 'decrease') => {
         const cartItems = get().cartItems;
-        const findProduct = cartItems.find(cartItem => cartItem.id === productId);
+        const findProduct = cartItems.find(cartItem => cartItem.uniqueId === productId);
         if (findProduct) {
             if (action === 'decrease') {
                 findProduct.quantity = findProduct.quantity! > 1 ? findProduct.quantity! - 1 : findProduct.quantity!;
@@ -98,11 +98,11 @@ export const createCartSlice: StateCreator<CartSlice> = (set, get) => ({
         set(() => ({
             cartItems: [],
             totalItems: 0,
-            totalPrice: 0,
-            tax: 0,
-            taxPrice: 0,
+            totalItemsPrice: 0,
+            totalTax: 0,
+            subTotal: 0,
             shippingPrice: 0,
-            itemsPrice: 0,
+            totalPrice: 0
         }));
     },
     showCart: false,

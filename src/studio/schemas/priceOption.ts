@@ -4,14 +4,24 @@ export default {
   type: "document",
   fields: [
     {
-        name: "title",
-        title: "Title",
-        type: "string"
+      name: "title",
+      title: "Title",
+      type: "string"
     },
     {
-        name: "additionalPrice",
-        title: "Additional Price",
-        type: "number"
+      name: "additionalPriceMainPrice",
+      title: "Additional Price Without Tax",
+      type: "number"
+    },
+    {
+      name: "additionalPriceTax",
+      title: "Additional Price Tax",
+      type: "number"
+    }, 
+    {
+      name: "additionalPrice",
+      title: "Additional Price",
+      type: "number"
     } 
   ]
 };

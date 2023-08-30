@@ -31,24 +31,18 @@ export default {
             }
         },
         {
-            name: 'price',
-            title: 'Price',
-            type: 'array',
-            of: [{type: 'number'}]
-        },
-        {
             name: "mainPrice",
             title: "Main Price",
             type: "number"
         },
         {
-            title: 'Tax',
             name: 'tax',
+            title: 'Tax',
             type: 'number',
         },
         {
-            title: 'Tax Price',
-            name: 'taxPrice',
+            name: 'mainPriceTaxed',
+            title: 'Main Price Taxed',
             type: 'number',
         },
         {

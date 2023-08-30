@@ -9,7 +9,7 @@ import { useEffect } from "react"
 import { FaStripe } from 'react-icons/fa'
 
 const CartPage = () => {
-  const { cartItems, totalItems, totalPrice, shippingPrice, tax, taxPrice, itemsPrice, removeFromCart, resetCart } = useCartStore();
+  const { cartItems, totalItems, totalItemsPrice, totalTax, subTotal, shippingPrice, totalPrice, updateQuantity, removeFromCart, resetCart } = useCartStore();
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -27,19 +27,19 @@ const CartPage = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             userEmail: session.user.email,
-            itemsPrice: itemsPrice,
-            cartItems,
-            shippingPrice: shippingPrice,
-            tax: tax,
-            taxPrice: taxPrice,
-            price: totalPrice,
+            itemsPrice: totalItemsPrice,
+            products: cartItems,
+            shippingPrice: shippingPrice, //Shipping price, including shipping tax
+            tax: totalTax, // Total items tax
+            taxPrice: subTotal, //Price including taxes, excluding shipping
+            price: totalPrice, //Final Price including shipping and taxes
             paymentMethod: "card",
             paymentStatus: "Not Paid",
             status: "Pending",
           }),
         });
         const data = await res.json()
-        router.push(`/pay/${data._id}`)
+        data ? router.push(`/pay/${data._id}`) : alert("Something went wrong")
       } catch (err) {
         console.log(err);
       }
@@ -82,7 +82,7 @@ const CartPage = () => {
               </div>
               <div className="py-4 mb-8 border-t border-b border-gray-200">
                 {cartItems.map((item) => (
-                <div key={item.id} className="flex flex-wrap items-center mb-6 -mx-4 md:mb-8">
+                <div key={item.uniqueId} className="flex flex-wrap items-center mb-6 -mx-4 md:mb-8">
                   <div className="md:px-4 mb-6 md:w-4/6 lg:w-6/12 md:mb-0">
                     <div className="flex flex-wrap items-center">
                       <div className="px-4 mb-3">
@@ -100,7 +100,8 @@ const CartPage = () => {
                     </div>
                   </div>
                   <div className="hidden px-4 lg:block lg:w-2/12">
-                    <p className="text-lg font-bold text-yellow-500">${item.taxPrice.toFixed(2)}</p>
+                    <p className="text-lg font-bold text-gold">${item.mainPriceTaxed.toFixed(2)}</p>
+                    <p className="text-xs font-bold text-chelseaBlue">${item.itemPrice.toFixed(2)} pre tax</p>
                   </div>
                   
                   <div className="w-auto px-4 md:w-1/6 lg:w-2/12 flex items-center text-xs md:text-lg">
@@ -112,7 +113,7 @@ const CartPage = () => {
                   
                   <div className="w-auto px-4 text-right md:w-1/6 lg:w-2/12 text-xs md:text-lg">
                     <span className="md:hidden mr-1">Subtotal:</span>
-                    <p className="font-bold text-yellow-500">${item.totalItemPrice.toFixed(2)}</p>
+                    <p className="font-bold text-gold">${item.subTotal.toFixed(2)}</p>
                   </div>
                 </div>
                 ))}
@@ -138,8 +139,20 @@ const CartPage = () => {
               <div className="p-6 border border-gold bg-lightGold md:p-8">
                 <h2 className="mb-8 text-base sm:text-3xl font-bold text-gray-700">Order Summary</h2>
                 <div className="flex items-center flex-wrap justify-between pb-4 mb-4 border-b border-gray-300">
-                  <span className="text-gray-700">Subtotal: {totalItems} items</span>
-                  <span className="text-xl font-bold text-gray-700 ">${totalPrice.toFixed(2)}</span>
+                  <span className="text-gray-700">Total Items</span>
+                  <span className="text-xl font-bold text-gray-700 ">{totalItems}</span>
+                </div>
+                <div className="flex items-center flex-wrap justify-between pb-4 mb-4 border-b border-gray-300">
+                  <span className="text-gray-700">Subtotal pre tax</span>
+                  <span className="text-xl font-bold text-gray-700 ">${totalItemsPrice.toFixed(2)}</span>
+                </div>
+                <div className="flex items-center flex-wrap justify-between pb-4 mb-4 border-b border-gray-300">
+                  <span className="text-gray-700">Total Tax</span>
+                  <span className="text-xl font-bold text-gray-700 ">${totalTax.toFixed(2)}</span>
+                </div>
+                <div className="flex items-center flex-wrap justify-between pb-4 mb-4 border-b border-gray-300">
+                  <span className="text-gray-700">Subtotal</span>
+                  <span className="text-xl font-bold text-gray-700 ">${subTotal.toFixed(2)}</span>
                 </div>
                 <div className="flex items-center flex-wrap justify-between pb-4 mb-4 ">
                   <span className="text-gray-700 ">Shipping</span>
@@ -149,7 +162,7 @@ const CartPage = () => {
                 </div>
                 <div className="flex items-center flex-wrap justify-between pb-4 mb-4 ">
                   <span className="text-gray-700">Order Total</span>
-                  <span className="text-xl font-bold text-gray-700">${(totalPrice + shippingPrice).toFixed(2)}</span>
+                  <span className="text-xl font-bold text-gray-700">${(totalPrice).toFixed(2)}</span>
                 </div>
                 <h2 className="text-xs sm:text-sm text-chelseaBlue mb-2">Payments powered by:</h2>
                 <div className="flex items-center mb-4 ">

@@ -53,22 +53,23 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
           _type: "reference"
         },
         ...dataToUpload,
-        products: body.products.map((product: CartItemType) => (
+        products: body.products.map((cartItem: CartItemType) => (
           {
             _type: "orderItem",
             _key: uuidv4(),
-            image: product.img?.src,
-            itemPrice: product.itemPrice,
-            optionTitle: product.optionTitle,
-            price: product.totalItemPrice,
-            quantity: product.quantity,
-            tax: product.tax,
-            taxPrice: product.taxPrice,
-            title: product.title
+            image: cartItem.img?.src,
+            itemPrice: cartItem.itemPrice,
+            optionTitle: cartItem.optionTitle,
+            price: cartItem.subTotal,
+            quantity: cartItem.quantity,
+            tax: cartItem.itemTax,
+            taxPrice: cartItem.mainPriceTaxed,
+            title: cartItem.title
           }
         ))
       }
      const order = await client.create(doc)
+     console.log(order)
 
       return new NextResponse(JSON.stringify(order), { status: 201 });
     } catch (err) {
