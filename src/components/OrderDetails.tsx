@@ -18,9 +18,9 @@ const OrderDetails = ({order}: IProps) => {
                         <span className="text-sm text-chelseaBlue"> x {item.quantity}</span>
                     </h3>
                     <div className="text-right">
-                        <span className="block">Total Price: $ {item.price!.toFixed(2)}</span>
-                        <span className="block text-sm">Item Price: $ {item.itemPrice.toFixed(2)}</span>
-                        <span className="block text-sm">Item Tax: $ {(item.tax).toFixed(2)}</span>
+                        <span className="block">Total Price: $ {item.price?.toFixed(2)}</span>
+                        <span className="block text-sm">Item Price: $ {item.itemPrice?.toFixed(2)}</span>
+                        <span className="block text-sm">Item Tax: $ {item.tax?.toFixed(2)}</span>
                     </div>
                 </li>
             ))}
@@ -29,7 +29,7 @@ const OrderDetails = ({order}: IProps) => {
             <div>
                 <div className="flex justify-between">
                     <span>Total Items Price</span>
-                    <span>$ {order?.itemsPrice.toFixed(2)}</span>
+                    <span>$ {order?.itemsPrice?.toFixed(2)}</span>
                 </div>
                 {discount ?
                 <div className="flex items-center space-x-2 text-xs">
@@ -51,23 +51,23 @@ const OrderDetails = ({order}: IProps) => {
         <div className="pt-4 space-y-2">
             <div className="flex justify-between">
                 <span>Tax</span>
-                <span>$ {(order?.tax!).toFixed(2)}</span>
+                <span>$ {order?.tax?.toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>$ {order?.taxPrice.toFixed(2)}</span>
+                <span>$ {order?.taxPrice?.toFixed(2)}</span>
             </div>
             <div className="flex flex-col">
                 <div className="flex justify-between">
                     <span>Shipping fee</span>
-                    <span>$ {order?.shippingPrice.toFixed(2)}</span>
+                    <span>$ {order?.shippingPrice?.toFixed(2)}</span>
                 </div>
                 <a rel="noopener noreferrer" href="#" className="text-xs hover:underline text-chelseaBlue">How do our fees work?</a>
             </div>
             <div className="space-y-6">
                 <div className="flex justify-between">
                     <span>Total</span>
-                    <span className="font-semibold">$ {order?.price.toFixed(2)}</span>
+                    <span className="font-semibold">$ {order?.price?.toFixed(2)}</span>
                 </div>
                 <div className={`w-full py-2 font-semibold border rounded ${order?.paymentStatus === "Paid" ? "bg-green-500 border-green-500" : "bg-red-500 border-red-500"} text-gray-100  text-center`}>
                     Payment status: {order?.paymentStatus}

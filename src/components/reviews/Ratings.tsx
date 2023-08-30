@@ -9,7 +9,7 @@ type Props = {
 
 const Ratings = ({data}: Props) => {
     const countPosts = (filter: number) => {
-        const ratingCount = data.filter((item: any) => item.rating === filter).length
+        const ratingCount = data?.filter((item: any) => item.rating === filter).length
         const percentage = (ratingCount / data.length) * 100
 
         return percentage
