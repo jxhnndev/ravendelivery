@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async (req: NextRequest) => {
   const session = await getAuthSession();
 
-  if (session) {
+  if (session?.user.email) {
     try {
       const reviews = await client.fetch(userReviewsQuery, {
         email: session.user.email!

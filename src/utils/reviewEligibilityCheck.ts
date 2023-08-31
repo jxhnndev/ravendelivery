@@ -9,7 +9,8 @@ export const useReviewCheck = (id: string) => {
         queryFn: () =>
           fetch(`${BASE_URL}/api/products/reviews`).then((res) => res.json()),
       });
-    const userReviewsOnProduct = data?.filter((item: any) => item.product._ref === id).length
+      console.log(data)
+    const userReviewsOnProduct = data?.length > 0 ?  data.filter((item: any) => item.product._ref === id).length : 0
     if (userReviewsOnProduct >= 1) {
         return true
     } else {
