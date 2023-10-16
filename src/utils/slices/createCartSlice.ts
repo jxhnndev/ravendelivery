@@ -65,11 +65,11 @@ export const createCartSlice: StateCreator<CartSlice> = (set, get) => ({
         const cartItems = get().cartItems.filter(
             cartItem => (cartItem.uniqueId !== item.uniqueId)
         )
-        const totalCartItems = cartItems.map(i=>i.quantity).reduce((a,b)=>a+b)
-        const totalCartItemsPrice = cartItems.map(i=>i.itemPrice * i.quantity).reduce((a,b)=>a+b)
-        const totalCartItemsTax = cartItems.map(i=>i.itemTax * i.quantity).reduce((a,b)=>a+b)
-        const cartItemsSubTotal = cartItems.map(i=>i.subTotal).reduce((a,b)=>a+b)
-        const calculatedShippingPrice = totalCartItems < 5 ? 10 : 0
+        const totalCartItems = cartItems.length > 0 ? cartItems.map(i=>i.quantity).reduce((a,b)=>a+b) : 0
+        const totalCartItemsPrice = cartItems.length > 0 ? cartItems.map(i=>i.itemPrice * i.quantity).reduce((a,b)=>a+b) : 0
+        const totalCartItemsTax = cartItems.length > 0 ? cartItems.map(i=>i.itemTax * i.quantity).reduce((a,b)=>a+b) : 0
+        const cartItemsSubTotal = cartItems.length > 0 ? cartItems.map(i=>i.subTotal).reduce((a,b)=>a+b) : 0
+        const calculatedShippingPrice = (totalCartItems < 5 && cartItems.length > 0) ? 10 : 0
         
         set(() => ({
             cartItems: cartItems,
